@@ -87,3 +87,13 @@
     {%- endfor -%}
 
 {%- endmacro -%}
+
+{%- macro print_list_from_selected(list_to_print=none, selected_columns=none, indent=4) -%}
+
+    {%- for col_name in list_to_print -%}
+        {% if col_name in selected_columns %}
+            {{- col_name | indent(indent) -}}{{ ",\n   " if not loop.last }}
+        {% endif %}
+{%- endfor -%}
+
+{%- endmacro -%}
