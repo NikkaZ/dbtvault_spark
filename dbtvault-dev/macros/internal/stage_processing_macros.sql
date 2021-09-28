@@ -95,3 +95,5 @@
             {{- col_name | indent(indent) -}}{{ ",\n   " if not loop.last }}
         {% endif %}
 {%- endfor -%}
+
+{%- endmacro -%}
