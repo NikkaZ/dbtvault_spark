@@ -9,7 +9,7 @@
                                               hashed_columns=hashed_columns,
                                               derived_columns=derived_columns,
                                               ranked_columns=ranked_columns,
-                                              selected_columns=selected_columns)) -}}
+                                              selected_columns=selected_columns) -}}
 {%- endmacro -%}
 
 {%- macro default__stage(include_source_columns, source_model, hashed_columns, derived_columns, ranked_columns, selected_columns) -%}
