@@ -21,7 +21,8 @@
         {%- set column_list = [] -%}
 
         {%- for source_col in source_model_cols -%}
-            {% if source_col.column in selected_columns %}
+            {# added not in cause some struct data has the same field inside. Example gender [struct<scn:int,from:int,to:int,gender:string>]#}
+            {% if source_col.column in selected_columns and source_col.column not in column_list %}
                 {%- do column_list.append(source_col.column) -%}
             {%- endif %}
         {%- endfor -%}
