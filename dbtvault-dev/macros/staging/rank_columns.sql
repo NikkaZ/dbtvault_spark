@@ -27,7 +27,6 @@
             {%- endif -%}
 
             {%- if dbtvault.is_list(order_by) -%}
-
                 {%- set order_by_str_lst = [] -%}
 
                 {% for order_by_col in order_by %}
