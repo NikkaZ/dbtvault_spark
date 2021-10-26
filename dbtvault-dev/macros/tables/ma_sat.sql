@@ -50,6 +50,17 @@ WITH source_data AS (
     {%- endif %}
 ),
 
+{# Dedupe source data #}
+source_data AS (
+    SELECT x.*
+    FROM (
+        SELECT s.*
+            ,RANK() OVER (PARTITION BY {{ dbtvault.prefix([src_pk], 's') }}, {{ dbtvault.prefix([src_hashdiff], 's', alias_target='source') }}, {{ dbtvault.prefix(cdk_cols, 's') }} ORDER BY {{ dbtvault.prefix([src_ldts], 's') }} ASC) AS source_rank
+        FROM source_data_filtered s
+    ) AS x
+    WHERE x.source_rank = 1
+),
+
 {% if dbtvault.is_any_incremental() %}
 
 {# Select latest records from satellite together with count of distinct hashdiff + cdk combinations for each hashkey #}
@@ -281,7 +292,55 @@ satellite_insert AS (
     WHERE {{ dbtvault.prefix([src_pk], 'latest_records') }} IS NULL
 ),
 
-{%- endif %}
+    {# Select PKs and hashdiff counts for matching stage and satellite records #}
+    {# Matching by hashkey + hashdiff + cdk #}
+    matching_records AS (
+        SELECT {{ dbtvault.prefix([src_pk], 'matching_selection') }},
+            MAX(cd.match_count) AS match_count
+        FROM matching_selection
+        INNER JOIN
+        (
+            SELECT {{ dbtvault.prefix([src_pk], 't') }}, COUNT(*) AS match_count
+            FROM (SELECT DISTINCT {{ dbtvault.prefix([src_pk], 's') }}, {{ dbtvault.prefix([src_hashdiff], 's') }}, {{ dbtvault.prefix(cdk_cols, 's') }} FROM matching_selection AS s) AS t
+            GROUP BY {{ dbtvault.prefix([src_pk], 't') }}
+        ) AS cd
+        ON {{ dbtvault.prefix([src_pk], 'cd') }} = {{ dbtvault.prefix([src_pk], 'matching_selection') }}
+        GROUP BY {{ dbtvault.prefix([src_pk], 'matching_selection') }}
+    ),
+
+    {# Select stage records with PKs that exist in satellite but where hashdiffs or group size differ #}
+    {# i.e. either match counts differ or where source / target counts differ  #}
+    satellite_update AS (
+        SELECT DISTINCT {{ dbtvault.prefix([src_pk], 'stage') }}
+        FROM source_data_with_counts AS stage
+        INNER JOIN (
+            SELECT {{ dbtvault.prefix([src_pk], 'latest_records') }},
+                MAX(latest_records.target_count) AS target_count,
+                MAX({{ dbtvault.prefix([src_ldts], 'latest_records') }}) AS max_load_datetime
+            FROM latest_records
+            GROUP BY {{ dbtvault.prefix([src_pk], 'latest_records') }}
+        ) AS latest_records
+            ON {{ dbtvault.prefix([src_pk], 'latest_records') }} = {{ dbtvault.prefix([src_pk], 'stage') }}
+        LEFT OUTER JOIN matching_records
+            ON {{ dbtvault.prefix([src_pk], 'matching_records') }} = {{ dbtvault.prefix([src_pk], 'latest_records') }}
+        WHERE (stage.source_count != latest_records.target_count
+            OR COALESCE(matching_records.match_count, 0) != latest_records.target_count
+            OR stage.source_count != COALESCE(matching_records.match_count, 0))
+        {%- if model.config.materialized == 'vault_insert_by_rank' or model.config.materialized == 'vault_insert_by_period' %}
+            AND ({{ dbtvault.prefix([src_ldts], 'stage') }} > latest_records.max_load_datetime)
+        {%- endif %}
+    ),
+
+    {# Select stage records with PKs that do not exist in satellite #}
+    satellite_insert AS (
+        SELECT DISTINCT {{ dbtvault.prefix([src_pk], 'stage') }}
+        FROM source_data AS stage
+        LEFT OUTER JOIN latest_records
+            ON {{ dbtvault.prefix([src_pk], 'stage') }} = {{ dbtvault.prefix([src_pk], 'latest_records') }}
+        WHERE {{ dbtvault.prefix([src_pk], 'latest_records') }} IS NULL
+    ),
+
+{% endif %}
 
 records_to_insert AS (
     {#- Restrict to "to-do lists" of keys selected by satellite_update and satellite_insert CTEs #}
@@ -291,7 +350,7 @@ records_to_insert AS (
     INNER JOIN satellite_update
         ON {{ dbtvault.prefix([src_pk], 'satellite_update') }} = {{ dbtvault.prefix([src_pk], 'stage') }}
 
-    UNION
+    UNION DISTINCT
 
     SELECT {{ dbtvault.alias_all(source_cols, 'stage') }}
     FROM source_data AS stage
@@ -304,6 +363,7 @@ records_to_insert AS (
 SELECT * FROM records_to_insert
 
 {%- endmacro -%}
+
 
 {%- macro bigquery__ma_sat(src_pk, src_cdk, src_hashdiff, src_payload, src_eff, src_ldts, src_source, source_model) -%}
 
