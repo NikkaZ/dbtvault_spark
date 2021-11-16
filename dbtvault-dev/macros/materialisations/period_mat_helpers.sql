@@ -304,7 +304,7 @@
             FROM stage
         {% endset %}
 
-        {% set min_max_dict = dbtvault.get_query_results_as_dict(query_sql) %}
+        {% set min_max_dict = dbt_utils.get_query_results_as_dict(query_sql) %}
 
         {% set start_date = min_max_dict['MIN'][0] | string %}
         {% set stop_date = min_max_dict['MAX'][0] | string %}
