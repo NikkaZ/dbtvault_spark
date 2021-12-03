@@ -232,8 +232,6 @@
 {%- if columns is string -%}
     {%- set column_str = dbtvault.as_constant(columns) -%}
     {{- "{}({} {}) AS {}".format(hash_alg, standardise | replace('[EXPRESSION]', column_str), hash_size, alias) | indent(4) -}}
-    {#    {{- "{}({}, {}) AS {}".format(hash_alg, standardise | replace('[EXPRESSION]', column_str), hash_size, alias) | indent(4) -}}
-#}
 {#- Else a list of columns to hash -#}
 {%- else -%}
     {%- set all_null = [] -%}
@@ -253,13 +251,6 @@
         {{- "," if not loop.last -}}
 
         {%- if loop.last -%}
-{#
-            {% if is_hashdiff %}
-                {{- "\n),{}) AS {}".format(hash_size, alias) -}}
-            {%- else -%}
-                {{- "\n), '{}')) AS BINARY({})) AS {}".format(all_null | join(""), hash_size, alias) -}}
-            {%- endif -%}
-            #}
             {% if is_hashdiff %}
                 {{- "\n) {}) AS {}".format(hash_size, alias) -}}
             {%- else -%}
