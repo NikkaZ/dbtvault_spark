@@ -217,8 +217,8 @@
     {%- set hash_alg = 'SHA2' -%}
     {%- set hash_size = ',256' -%}
 {%- else -%}
-    {%- set hash_alg = 'MD5' -%}
-    {%- set hash_size = '' -%}
+    {%- set hash_alg = 'SHA2' -%}
+    {%- set hash_size = ',256' -%}
 {%- endif -%}
 
 {%- set standardise = "NULLIF(UPPER(TRIM(CAST([EXPRESSION] AS STRING))), '')" %}
