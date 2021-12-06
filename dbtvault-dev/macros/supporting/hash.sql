@@ -254,7 +254,7 @@
             {% if is_hashdiff %}
                 {{- "\n) {}) AS {}".format(hash_size, alias) -}}
             {%- else -%}
-                {{- "\n) '{}')) {}) AS {}".format(all_null | join(""), hash_size, alias) -}}
+                {{- "\n), '{}'){}) AS {}".format(all_null | join(""), hash_size, alias) -}}
             {%- endif -%}
         {%- else -%}
 
