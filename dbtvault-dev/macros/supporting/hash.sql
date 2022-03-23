@@ -221,7 +221,7 @@
     {%- set hash_size = ',256' -%}
 {%- endif -%}
 
-{%- set standardise = "NULLIF(UPPER(TRIM(CAST([EXPRESSION] AS STRING))), '')" %}
+{%- set standardise = "NULLIF(UPPER(TRIM(CAST([EXPRESSION] AS BINARY))), '')" %}
 
 {#- Alpha sort columns before hashing if a hashdiff -#}
 {%- if is_hashdiff and dbtvault.is_list(columns) -%}
