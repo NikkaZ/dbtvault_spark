@@ -217,8 +217,8 @@
     {%- set hash_alg = 'SHA2' -%}
     {%- set hash_size = ',256' -%}
 {%- else -%}
-    {%- set hash_alg = 'SHA2' -%}
-    {%- set hash_size = ',256' -%}
+    {%- set hash_alg = 'MD5' -%}
+    {%- set hash_size = '' -%}
 {%- endif -%}
 
 {%- set standardise = "NULLIF(UPPER(TRIM(CAST([EXPRESSION] AS STRING))), '')" %}
@@ -231,15 +231,15 @@
 {#- If single column to hash -#}
 {%- if columns is string -%}
     {%- set column_str = dbtvault.as_constant(columns) -%}
-    {{- "{}({} {}) AS {}".format(hash_alg, standardise | replace('[EXPRESSION]', column_str), hash_size, alias) | indent(4) -}}
+    {{- "CAST({}({} {}) AS BINARY) AS {}".format(hash_alg, standardise | replace('[EXPRESSION]', column_str), hash_size, alias) | indent(4) -}}
 {#- Else a list of columns to hash -#}
 {%- else -%}
     {%- set all_null = [] -%}
 
     {%- if is_hashdiff -%}
-        {{- "{}(CONCAT_WS('{}',".format(hash_alg, concat_string) | indent(4) -}}
+        {{- "CAST({}(CONCAT_WS('{}',".format(hash_alg, concat_string) | indent(4) -}}
     {%- else -%}
-        {{- "{}(NULLIF(CONCAT_WS('{}',".format(hash_alg, concat_string) | indent(4) -}}
+        {{- "CAST({}(NULLIF(CONCAT_WS('{}',".format(hash_alg, concat_string) | indent(4) -}}
     {%- endif -%}
 
     {%- for column in columns -%}
@@ -252,9 +252,9 @@
 
         {%- if loop.last -%}
             {% if is_hashdiff %}
-                {{- "\n) {}) AS {}".format(hash_size, alias) -}}
+                {{- "\n) {}) AS BINARY) AS {}".format(hash_size, alias) -}}
             {%- else -%}
-                {{- "\n), '{}'){}) AS {}".format(all_null | join(""), hash_size, alias) -}}
+                {{- "\n), '{}'){}) AS BINARY) AS {}".format(all_null | join(""), hash_size, alias) -}}
             {%- endif -%}
         {%- else -%}
 
