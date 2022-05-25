@@ -1,8 +1,10 @@
 from behave import fixture
 
 
+# Snowflake
+
 @fixture
-def satellite(context):
+def satellite_snowflake(context):
     """
     Define the structures and metadata to load satellites
     """
@@ -46,6 +48,14 @@ def satellite(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -58,7 +68,7 @@ def satellite(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -68,7 +78,7 @@ def satellite(context):
             }
         },
         "RAW_STAGE_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -78,7 +88,7 @@ def satellite(context):
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -89,8 +99,20 @@ def satellite(context):
                 "SOURCE": "VARCHAR"
             }
         },
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR",
+                "CUSTOMER_PHONE": "VARCHAR",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "VARCHAR"
+            }
+        },
         "SATELLITE_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -105,7 +127,7 @@ def satellite(context):
 
 
 @fixture
-def satellite_cycle(context):
+def satellite_cycle_snowflake(context):
     """
     Define the structures and metadata to perform load cycles for satellites
     """
@@ -146,7 +168,7 @@ def satellite_cycle(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_DOB": "DATE",
@@ -156,7 +178,7 @@ def satellite_cycle(context):
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_DOB": "DATE",
@@ -167,6 +189,9 @@ def satellite_cycle(context):
             }
         }
     }
+
+
+# BigQuery
 
 
 @fixture
@@ -214,6 +239,14 @@ def satellite_bigquery(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -226,7 +259,7 @@ def satellite_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -236,17 +269,17 @@ def satellite_bigquery(context):
             }
         },
         "RAW_STAGE_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
-                "CUSTOMER_DOB": "DATETIME",
+                "CUSTOMER_DOB": "DATE",
                 "LOAD_DATETIME": "DATETIME",
                 "SOURCE": "STRING"
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -257,12 +290,24 @@ def satellite_bigquery(context):
                 "SOURCE": "STRING"
             }
         },
-        "SATELLITE_TS": {
-            "+column_types": {
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
-                "CUSTOMER_DOB": "DATETIME",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "STRING",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "STRING"
+            }
+        },
+        "SATELLITE_TS": {
+            "column_types": {
+                "CUSTOMER_PK": "STRING",
+                "CUSTOMER_NAME": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "CUSTOMER_DOB": "DATE",
                 "HASHDIFF": "STRING",
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
@@ -314,7 +359,7 @@ def satellite_cycle_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_DOB": "DATE",
@@ -324,7 +369,7 @@ def satellite_cycle_bigquery(context):
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_DOB": "DATE",
@@ -335,6 +380,9 @@ def satellite_cycle_bigquery(context):
             }
         }
     }
+
+
+# SQLServer
 
 
 @fixture
@@ -382,6 +430,14 @@ def satellite_sqlserver(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -394,7 +450,7 @@ def satellite_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -404,17 +460,17 @@ def satellite_sqlserver(context):
             }
         },
         "RAW_STAGE_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -425,15 +481,27 @@ def satellite_sqlserver(context):
                 "SOURCE": "VARCHAR(50)"
             }
         },
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "VARCHAR(50)"
+            }
+        },
         "SATELLITE_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
                 "HASHDIFF": "BINARY(16)",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         }
@@ -482,7 +550,7 @@ def satellite_cycle_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
@@ -492,7 +560,7 @@ def satellite_cycle_sqlserver(context):
             }
         },
         "SATELLITE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",

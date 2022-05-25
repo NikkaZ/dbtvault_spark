@@ -2,7 +2,7 @@ from behave import fixture
 
 
 @fixture
-def bridge(context):
+def bridge_snowflake(context):
     """
     Define the structures and metadata to perform bridge load
     """
@@ -258,7 +258,7 @@ def bridge(context):
 
     context.seed_config = {
         "RAW_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "ORDER_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -267,7 +267,7 @@ def bridge(context):
             }
         },
         "RAW_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_ID": "VARCHAR",
                 "PRODUCT_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -276,7 +276,7 @@ def bridge(context):
             }
         },
         "RAW_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_ID": "VARCHAR",
                 "COMPONENT_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -285,7 +285,7 @@ def bridge(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -293,7 +293,7 @@ def bridge(context):
             }
         },
         "LINK_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "BINARY(16)",
                 "CUSTOMER_FK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
@@ -302,7 +302,7 @@ def bridge(context):
             }
         },
         "LINK_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
@@ -311,7 +311,7 @@ def bridge(context):
             }
         },
         "LINK_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
                 "COMPONENT_FK": "BINARY(16)",
@@ -320,7 +320,7 @@ def bridge(context):
             }
         },
         "EFF_SAT_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "BINARY(16)",
                 "CUSTOMER_FK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
@@ -332,7 +332,7 @@ def bridge(context):
             }
         },
         "EFF_SAT_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
@@ -344,7 +344,7 @@ def bridge(context):
             }
         },
         "EFF_SAT_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
                 "COMPONENT_FK": "BINARY(16)",
@@ -356,19 +356,19 @@ def bridge(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "BRIDGE_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
@@ -376,7 +376,7 @@ def bridge(context):
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
@@ -387,6 +387,7 @@ def bridge(context):
     }
 
 
+@fixture
 def bridge_bigquery(context):
     """
     Define the structures and metadata to perform bridge load
@@ -643,7 +644,7 @@ def bridge_bigquery(context):
 
     context.seed_config = {
         "RAW_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "ORDER_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -652,7 +653,7 @@ def bridge_bigquery(context):
             }
         },
         "RAW_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_ID": "STRING",
                 "PRODUCT_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -661,7 +662,7 @@ def bridge_bigquery(context):
             }
         },
         "RAW_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_ID": "STRING",
                 "COMPONENT_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -670,7 +671,7 @@ def bridge_bigquery(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -678,7 +679,7 @@ def bridge_bigquery(context):
             }
         },
         "LINK_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "STRING",
                 "CUSTOMER_FK": "STRING",
                 "ORDER_FK": "STRING",
@@ -687,7 +688,7 @@ def bridge_bigquery(context):
             }
         },
         "LINK_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "STRING",
                 "ORDER_FK": "STRING",
                 "PRODUCT_FK": "STRING",
@@ -696,7 +697,7 @@ def bridge_bigquery(context):
             }
         },
         "LINK_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "STRING",
                 "PRODUCT_FK": "STRING",
                 "COMPONENT_FK": "STRING",
@@ -705,7 +706,7 @@ def bridge_bigquery(context):
             }
         },
         "EFF_SAT_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "STRING",
                 "CUSTOMER_FK": "STRING",
                 "ORDER_FK": "STRING",
@@ -717,7 +718,7 @@ def bridge_bigquery(context):
             }
         },
         "EFF_SAT_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "STRING",
                 "ORDER_FK": "STRING",
                 "PRODUCT_FK": "STRING",
@@ -729,7 +730,7 @@ def bridge_bigquery(context):
             }
         },
         "EFF_SAT_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "STRING",
                 "PRODUCT_FK": "STRING",
                 "COMPONENT_FK": "STRING",
@@ -741,19 +742,19 @@ def bridge_bigquery(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "BRIDGE_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "STRING",
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "STRING",
@@ -761,7 +762,7 @@ def bridge_bigquery(context):
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "AS_OF_DATE": "DATETIME",
                 "LINK_CUSTOMER_ORDER_PK": "STRING",
@@ -1029,127 +1030,127 @@ def bridge_sqlserver(context):
 
     context.seed_config = {
         "RAW_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "ORDER_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
-                "END_DATE": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
+                "END_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_ID": "VARCHAR(50)",
                 "PRODUCT_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
-                "END_DATE": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
+                "END_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_ID": "VARCHAR(50)",
                 "COMPONENT_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
-                "END_DATE": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
+                "END_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "LINK_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "BINARY(16)",
                 "CUSTOMER_FK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "LINK_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "LINK_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
                 "COMPONENT_FK": "BINARY(16)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "EFF_SAT_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ORDER_PK": "BINARY(16)",
                 "CUSTOMER_FK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
-                "START_DATE": "DATETIME",
-                "END_DATE": "DATETIME",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "START_DATE": "DATETIME2",
+                "END_DATE": "DATETIME2",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "EFF_SAT_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "ORDER_PRODUCT_PK": "BINARY(16)",
                 "ORDER_FK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
-                "START_DATE": "DATETIME",
-                "END_DATE": "DATETIME",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "START_DATE": "DATETIME2",
+                "END_DATE": "DATETIME2",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "EFF_SAT_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "PRODUCT_COMPONENT_PK": "BINARY(16)",
                 "PRODUCT_FK": "BINARY(16)",
                 "COMPONENT_FK": "BINARY(16)",
-                "START_DATE": "DATETIME",
-                "END_DATE": "DATETIME",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "START_DATE": "DATETIME2",
+                "END_DATE": "DATETIME2",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME"
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2"
             }
         },
         "BRIDGE_CUSTOMER_ORDER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
-                "AS_OF_DATE": "DATETIME",
+                "AS_OF_DATE": "DATETIME2",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
-                "AS_OF_DATE": "DATETIME",
+                "AS_OF_DATE": "DATETIME2",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
                 "LINK_ORDER_PRODUCT_PK": "BINARY(16)",
             }
         },
         "BRIDGE_CUSTOMER_ORDER_PRODUCT_COMPONENT": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
-                "AS_OF_DATE": "DATETIME",
+                "AS_OF_DATE": "DATETIME2",
                 "LINK_CUSTOMER_ORDER_PK": "BINARY(16)",
                 "LINK_ORDER_PRODUCT_PK": "BINARY(16)",
                 "LINK_PRODUCT_COMPONENT_PK": "BINARY(16)",
