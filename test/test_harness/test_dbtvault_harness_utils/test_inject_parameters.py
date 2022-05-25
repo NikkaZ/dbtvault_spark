@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import pytest
 
 import dbtvault_harness_utils
+=======
+from test import dbtvault_harness_utils
+>>>>>>> dbtvault_update
 
 
 def test_inject_parameters_success():

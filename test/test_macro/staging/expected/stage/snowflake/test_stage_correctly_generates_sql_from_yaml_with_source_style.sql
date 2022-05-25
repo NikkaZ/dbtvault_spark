@@ -2,6 +2,7 @@ WITH source_data AS (
 
     SELECT
 
+<<<<<<< HEAD
     LOAD_DATE,
     CUSTOMER_ID,
     CUSTOMER_DOB,
@@ -16,6 +17,22 @@ WITH source_data AS (
     TEST_COLUMN_7,
     TEST_COLUMN_8,
     TEST_COLUMN_9
+=======
+    "LOAD_DATE",
+    "CUSTOMER_ID",
+    "CUSTOMER_DOB",
+    "CUSTOMER_NAME",
+    "NATIONALITY",
+    "PHONE",
+    "TEST_COLUMN_2",
+    "TEST_COLUMN_3",
+    "TEST_COLUMN_4",
+    "TEST_COLUMN_5",
+    "TEST_COLUMN_6",
+    "TEST_COLUMN_7",
+    "TEST_COLUMN_8",
+    "TEST_COLUMN_9"
+>>>>>>> dbtvault_update
 
     FROM [DATABASE_NAME].[SCHEMA_NAME].raw_source_table
 ),
@@ -24,6 +41,7 @@ derived_columns AS (
 
     SELECT
 
+<<<<<<< HEAD
     LOAD_DATE,
     CUSTOMER_ID,
     CUSTOMER_DOB,
@@ -40,6 +58,24 @@ derived_columns AS (
     TEST_COLUMN_9,
     'STG_BOOKING' AS SOURCE,
     LOAD_DATE AS EFFECTIVE_FROM
+=======
+    "LOAD_DATE",
+    "CUSTOMER_ID",
+    "CUSTOMER_DOB",
+    "CUSTOMER_NAME",
+    "NATIONALITY",
+    "PHONE",
+    "TEST_COLUMN_2",
+    "TEST_COLUMN_3",
+    "TEST_COLUMN_4",
+    "TEST_COLUMN_5",
+    "TEST_COLUMN_6",
+    "TEST_COLUMN_7",
+    "TEST_COLUMN_8",
+    "TEST_COLUMN_9",
+    'STG_BOOKING' AS "SOURCE",
+    "LOAD_DATE" AS "EFFECTIVE_FROM"
+>>>>>>> dbtvault_update
 
     FROM source_data
 ),
@@ -48,6 +84,7 @@ hashed_columns AS (
 
     SELECT
 
+<<<<<<< HEAD
     LOAD_DATE,
     CUSTOMER_ID,
     CUSTOMER_DOB,
@@ -76,6 +113,36 @@ hashed_columns AS (
         IFNULL(NULLIF(UPPER(TRIM(CAST(NATIONALITY AS VARCHAR))), ''), '^^'),
         IFNULL(NULLIF(UPPER(TRIM(CAST(PHONE AS VARCHAR))), ''), '^^')
     )) AS BINARY(16)) AS CUSTOMER_HASHDIFF
+=======
+    "LOAD_DATE",
+    "CUSTOMER_ID",
+    "CUSTOMER_DOB",
+    "CUSTOMER_NAME",
+    "NATIONALITY",
+    "PHONE",
+    "TEST_COLUMN_2",
+    "TEST_COLUMN_3",
+    "TEST_COLUMN_4",
+    "TEST_COLUMN_5",
+    "TEST_COLUMN_6",
+    "TEST_COLUMN_7",
+    "TEST_COLUMN_8",
+    "TEST_COLUMN_9",
+    "SOURCE",
+    "EFFECTIVE_FROM",
+
+    CAST((MD5_BINARY(NULLIF(UPPER(TRIM(CAST("CUSTOMER_ID" AS VARCHAR))), ''))) AS BINARY(16)) AS "CUSTOMER_PK",
+    CAST(MD5_BINARY(CONCAT_WS('||',
+        IFNULL(NULLIF(UPPER(TRIM(CAST("CUSTOMER_DOB" AS VARCHAR))), ''), '^^'),
+        IFNULL(NULLIF(UPPER(TRIM(CAST("CUSTOMER_ID" AS VARCHAR))), ''), '^^'),
+        IFNULL(NULLIF(UPPER(TRIM(CAST("CUSTOMER_NAME" AS VARCHAR))), ''), '^^')
+    )) AS BINARY(16)) AS "CUST_CUSTOMER_HASHDIFF",
+    CAST(MD5_BINARY(CONCAT_WS('||',
+        IFNULL(NULLIF(UPPER(TRIM(CAST("CUSTOMER_ID" AS VARCHAR))), ''), '^^'),
+        IFNULL(NULLIF(UPPER(TRIM(CAST("NATIONALITY" AS VARCHAR))), ''), '^^'),
+        IFNULL(NULLIF(UPPER(TRIM(CAST("PHONE" AS VARCHAR))), ''), '^^')
+    )) AS BINARY(16)) AS "CUSTOMER_HASHDIFF"
+>>>>>>> dbtvault_update
 
     FROM derived_columns
 ),
@@ -84,6 +151,7 @@ columns_to_select AS (
 
     SELECT
 
+<<<<<<< HEAD
     LOAD_DATE,
     CUSTOMER_ID,
     CUSTOMER_DOB,
@@ -103,6 +171,27 @@ columns_to_select AS (
     CUSTOMER_PK,
     CUST_CUSTOMER_HASHDIFF,
     CUSTOMER_HASHDIFF
+=======
+    "LOAD_DATE",
+    "CUSTOMER_ID",
+    "CUSTOMER_DOB",
+    "CUSTOMER_NAME",
+    "NATIONALITY",
+    "PHONE",
+    "TEST_COLUMN_2",
+    "TEST_COLUMN_3",
+    "TEST_COLUMN_4",
+    "TEST_COLUMN_5",
+    "TEST_COLUMN_6",
+    "TEST_COLUMN_7",
+    "TEST_COLUMN_8",
+    "TEST_COLUMN_9",
+    "SOURCE",
+    "EFFECTIVE_FROM",
+    "CUSTOMER_PK",
+    "CUST_CUSTOMER_HASHDIFF",
+    "CUSTOMER_HASHDIFF"
+>>>>>>> dbtvault_update
 
     FROM hashed_columns
 )

@@ -147,7 +147,11 @@ def t_link(model_name, src_pk, src_fk, src_eff, src_ldts, src_source, source_mod
 
 def sat(model_name, src_pk, src_hashdiff, src_payload,
         src_eff, src_ldts, src_source, source_model,
+<<<<<<< HEAD
         config, depends_on="", out_of_sequence=None):
+=======
+        config, depends_on=""):
+>>>>>>> dbtvault_update
     """
     Generate a satellite model template
         :param model_name: Name of the model file
@@ -158,7 +162,10 @@ def sat(model_name, src_pk, src_hashdiff, src_payload,
         :param src_ldts: Source load date timestamp
         :param src_source: Source record source column
         :param source_model: Model name to select from
+<<<<<<< HEAD
         :param out_of_sequence: Out of sequence configuration
+=======
+>>>>>>> dbtvault_update
         :param config: Optional model config
         :param depends_on: Optional forced dependency
     """
@@ -168,8 +175,12 @@ def sat(model_name, src_pk, src_hashdiff, src_payload,
     {{{{ config({config}) }}}}
     {{{{ dbtvault.sat(src_pk={src_pk}, src_hashdiff={src_hashdiff}, src_payload={src_payload},
                       src_eff={src_eff}, src_ldts={src_ldts}, src_source={src_source}, 
+<<<<<<< HEAD
                       source_model={source_model}, 
                       out_of_sequence={out_of_sequence if out_of_sequence else 'none'}) }}}}
+=======
+                      source_model={source_model}) }}}}
+>>>>>>> dbtvault_update
     """
 
     template_to_file(template, model_name)
@@ -277,7 +288,11 @@ def pit(model_name, source_model, src_pk, as_of_dates_table, satellites,
     {{{{ config({config}) }}}}
     {{{{ dbtvault.pit(src_pk={src_pk}, 
                       as_of_dates_table={as_of_dates_table}, 
+<<<<<<< HEAD
                       satellites{satellites}, 
+=======
+                      satellites={satellites}, 
+>>>>>>> dbtvault_update
                       stage_tables={stage_tables},
                       src_ldts={src_ldts}, source_model={source_model}) }}}}
     """
@@ -325,11 +340,20 @@ def macro_model(model_name, macro_name, metadata=None):
         "prefix": prefix_macro,
         "derive_columns": derive_columns_macro,
         "hash_columns": hash_columns_macro,
+<<<<<<< HEAD
+=======
+        "rank_columns": rank_columns_macro,
+>>>>>>> dbtvault_update
         "stage": stage_macro,
         "expand_column_list": expand_column_list_macro,
         "as_constant": as_constant_macro,
         "alias": alias_macro,
+<<<<<<< HEAD
         "alias_all": alias_all_macro
+=======
+        "alias_all": alias_all_macro,
+        "escape_column_names": escape_column_names_macro
+>>>>>>> dbtvault_update
     }
 
     if generator_functions.get(macro_name):
@@ -373,6 +397,19 @@ def hash_columns_macro(model_name, metadata):
     template_to_file(textwrap.dedent(template), model_name)
 
 
+<<<<<<< HEAD
+=======
+def rank_columns_macro(model_name, metadata):
+    template = f"{{%- set yaml_metadata -%}}\n" \
+               f"{dict_to_yaml_string(metadata)}" \
+               f"{{%- endset -%}}\n\n" \
+               f"{{% set metadata_dict = fromyaml(yaml_metadata) %}}\n\n" \
+               f"{{{{ dbtvault.rank_columns(columns=metadata_dict['columns']) }}}}"
+
+    template_to_file(textwrap.dedent(template), model_name)
+
+
+>>>>>>> dbtvault_update
 def stage_macro(model_name, metadata):
     template = f"{{%- set yaml_metadata -%}}\n" \
                f"{dict_to_yaml_string(metadata)}" \
@@ -393,6 +430,15 @@ def expand_column_list_macro(model_name, **_):
     template_to_file(template, model_name)
 
 
+<<<<<<< HEAD
+=======
+def escape_column_names_macro(model_name, **_):
+    template = "{{- dbtvault.escape_column_names(columns=var('columns', none)) -}}"
+
+    template_to_file(template, model_name)
+
+
+>>>>>>> dbtvault_update
 def as_constant_macro(model_name, **_):
     template = "{{- dbtvault.as_constant(column_str=var('column_str', none)) -}}"
 
@@ -568,6 +614,7 @@ def add_seed_config(seed_name: str, seed_config: dict, include_columns=None):
         :param seed_config: Configuration dict for seed file
         :param include_columns: A list of columns to add to the seed config, All if not provided
     """
+<<<<<<< HEAD
 
     yml = ruamel.yaml.YAML()
 
@@ -588,6 +635,26 @@ def add_seed_config(seed_name: str, seed_config: dict, include_columns=None):
         yml.indent(sequence=4, offset=2)
 
         yml.dump(project_file, f)
+=======
+    yml = ruamel.yaml.YAML()
+    yml.preserve_quotes = True
+    yml.indent(sequence=4, offset=2)
+    properties_path = TEMP_SEED_DIR / 'vault_properties.yml'
+
+    if include_columns:
+        seed_config['column_types'] = {k: v for k, v in seed_config['column_types'].items() if
+                                       k in include_columns}
+
+    seed_properties = {
+        'version': 2,
+        'seeds': [
+            {'name': seed_name, 'config': {**seed_config, '+quote_columns': True}}
+        ]
+    }
+
+    with open(properties_path, 'w+') as f:
+        yml.dump(seed_properties, f)
+>>>>>>> dbtvault_update
 
 
 def create_test_model_schema_dict(*, target_model_name, expected_output_csv, unique_id, columns_to_compare,
@@ -601,7 +668,11 @@ def create_test_model_schema_dict(*, target_model_name, expected_output_csv, uni
     test_yaml = {
         "models": [{
             "name": target_model_name, "tests": [{
+<<<<<<< HEAD
                 "assert_data_equal_to_expected": {
+=======
+                "expect_tables_to_match": {
+>>>>>>> dbtvault_update
                     "expected_seed": expected_output_csv,
                     "unique_id": unique_id,
                     "compare_columns": columns_to_compare}}]}]}
@@ -677,7 +748,11 @@ def clean_test_schema_file():
     Delete the schema_test.yml file if it exists
     """
 
+<<<<<<< HEAD
     if os.path.exists(TEST_SCHEMA_YML_FILE):
+=======
+    if TEST_SCHEMA_YML_FILE.exists():
+>>>>>>> dbtvault_update
         os.remove(TEST_SCHEMA_YML_FILE)
 
 

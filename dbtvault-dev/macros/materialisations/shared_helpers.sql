@@ -1,12 +1,18 @@
 {%- macro check_placeholder(model_sql, placeholder='__PERIOD_FILTER__') -%}
 
     {%- if model_sql.find(placeholder) == -1 -%}
+<<<<<<< HEAD
         {%- set error_message -%}
             Model '{{ model.unique_id }}' does not include the required string '{{ placeholder }}' in its sql
+=======
+    {%- set error_message -%}
+    Model '{{ model.unique_id }}' does not include the required string '{{ placeholder }}' in its sql
+>>>>>>> dbtvault_update
         {%- endset -%}
         {{- exceptions.raise_compiler_error(error_message) -}}
     {%- endif -%}
 
+<<<<<<< HEAD
 {%- endmacro -%}
 
 
@@ -16,4 +22,6 @@
     {%- else -%}
         {%- do return(false) -%}
     {%- endif -%}
+=======
+>>>>>>> dbtvault_update
 {%- endmacro -%}

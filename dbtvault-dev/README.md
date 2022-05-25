@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <img src="https://user-images.githubusercontent.com/25080503/65772647-89525700-e132-11e9-80ff-12ad30a25466.png" alt="dbtvault">
 </p>
@@ -12,13 +13,26 @@
     alt="Join our slack"
   /></a>
 </p>
+=======
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/25080503/65772647-89525700-e132-11e9-80ff-12ad30a25466.png" alt="dbtvault">
+
+  [![Documentation Status](https://img.shields.io/badge/docs-stable-blue)](https://dbtvault.readthedocs.io/en/stable/?badge=stable)
+  [![Slack](https://img.shields.io/badge/Slack-Join-yellow?style=flat&logo=slack)](https://join.slack.com/t/dbtvault/shared_invite/enQtODY5MTY3OTIyMzg2LWJlZDMyNzM4YzAzYjgzYTY0MTMzNTNjN2EyZDRjOTljYjY0NDYyYzEwMTlhODMzNGY3MmU2ODNhYWUxYmM2NjA)
+  
+</div>
+>>>>>>> dbtvault_update
 
 
 [Changelog and past doc versions](https://dbtvault.readthedocs.io/en/latest/changelog/stable)
 
 # dbtvault by [Datavault](https://www.data-vault.co.uk)
 
+<<<<<<< HEAD
 Build your own Data Vault data warehouse! dbtvault is a free to use dbt package that generates & executes the ETL you need to run a Data Vault 2.0 Data Warehouse on a Snowflake database.
+=======
+Build your own Data Vault data warehouse! dbtvault is a free to use dbt package that generates & executes the ETL you need to run a Data Vault 2.0 Data Warehouse on your data platform.
+>>>>>>> dbtvault_update
 
 What does dbtvault offer?
 - productivity gains, fewer errors
@@ -37,9 +51,15 @@ Learn quickly with our worked example:
 
 - [Project Repository](https://github.com/Datavault-UK/snowflakeDemo)
 
+<<<<<<< HEAD
 ## Currently supported databases:
 
 - [snowflake](https://www.snowflake.com/about/)
+=======
+## Supported platforms:
+
+[Platform support matrix](https://dbtvault.readthedocs.io/en/latest/macros/#platform-support)
+>>>>>>> dbtvault_update
 
 ## Installation
 
@@ -56,7 +76,11 @@ or [read the docs](https://docs.getdbt.com/docs/building-a-dbt-project/package-m
 # Configure model
 {{- config(...)                          -}}
 
+<<<<<<< HEAD
 # Set metadata
+=======
+# Provide metadata
+>>>>>>> dbtvault_update
 {%- set src_pk = ...                     -%}
 ...
 
@@ -71,6 +95,18 @@ Talk to our developers and other members of our growing community, get support a
 
 [![Join our Slack](https://img.shields.io/badge/Slack-Join-yellow?style=flat&logo=slack)](https://join.slack.com/t/dbtvault/shared_invite/enQtODY5MTY3OTIyMzg2LWJlZDMyNzM4YzAzYjgzYTY0MTMzNTNjN2EyZDRjOTljYjY0NDYyYzEwMTlhODMzNGY3MmU2ODNhYWUxYmM2NjA)
 
+<<<<<<< HEAD
+=======
+## Awards
+
+<p align="left">
+  <a href="https://www.portsmouth.co.uk/business/first-ever-innovation-awards-wow-guests-in-portsmouth-with-stunning-displays-of-impressive-work-as-honours-are-handed-out-in-10-categories-3445796"> 
+    <img src="https://user-images.githubusercontent.com/25080503/140721804-9257d5fd-5e95-4c45-ada2-bc17d8089534.png" alt="innovation awards" 
+    width="250" />
+  </a>
+</p>
+
+>>>>>>> dbtvault_update
 ## Contributing
 [View our contribution guidelines](CONTRIBUTING.md)
 

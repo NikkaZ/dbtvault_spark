@@ -7,19 +7,28 @@ import shutil
 import sys
 from hashlib import md5, sha256
 from pathlib import Path
+<<<<<<< HEAD
 from subprocess import PIPE, Popen, STDOUT
+=======
+>>>>>>> dbtvault_update
 from typing import List
 
 import pandas as pd
 import pexpect
+<<<<<<< HEAD
 import yaml
 from _pytest.fixtures import FixtureRequest
 from behave.model import Table
 from environs import Env
+=======
+from _pytest.fixtures import FixtureRequest
+from behave.model import Table
+>>>>>>> dbtvault_update
 from numpy import NaN
 from pandas import Series
 
 import test
+<<<<<<< HEAD
 
 
 def platform():
@@ -83,6 +92,9 @@ def setup_environment():
         os.environ['DBT_PROFILES_DIR'] = str(test.PROFILE_DIR)
 
     os.environ['PLATFORM'] = p
+=======
+from env import env_utils
+>>>>>>> dbtvault_update
 
 
 def inject_parameters(file_contents: str, parameters: dict):
@@ -113,14 +125,22 @@ def clean_target():
     Faster than running dbt clean.
     """
 
+<<<<<<< HEAD
     shutil.rmtree(test.TESTS_DBT_ROOT / 'target', ignore_errors=True)
 
 
 def clean_csv():
+=======
+    shutil.rmtree(test.TEST_PROJECT_ROOT / 'target', ignore_errors=True)
+
+
+def clean_seeds(model_name=None):
+>>>>>>> dbtvault_update
     """
     Deletes csv files in csv folder.
     """
 
+<<<<<<< HEAD
     delete_files = [file for file in glob.glob(str(test.CSV_DIR / '*.csv'), recursive=True)]
 
     for file in delete_files:
@@ -128,14 +148,42 @@ def clean_csv():
 
 
 def clean_models():
+=======
+    if model_name:
+        delete_files = [test.TEMP_SEED_DIR / f"{model_name.lower()}.csv"]
+    else:
+        delete_files = []
+        for (dir_path, dir_names, filenames) in os.walk(test.TEMP_SEED_DIR):
+            for filename in filenames:
+                if filename != ".gitkeep":
+                    delete_files.append(Path(dir_path) / filename)
+
+    for file in delete_files:
+        if os.path.isfile(file):
+            os.remove(file)
+
+
+def clean_models(model_name=None):
+>>>>>>> dbtvault_update
     """
     Deletes models in features folder.
     """
 
+<<<<<<< HEAD
     delete_files = [file for file in glob.glob(str(test.TEST_MODELS_ROOT / '*.sql'), recursive=True)]
 
     for file in delete_files:
         os.remove(file)
+=======
+    if model_name:
+        delete_files = [test.TEST_MODELS_ROOT / f"{model_name.lower()}.sql"]
+    else:
+        delete_files = [file for file in glob.glob(str(test.TEST_MODELS_ROOT / '*.sql'), recursive=True)]
+
+    for file in delete_files:
+        if os.path.isfile(file):
+            os.remove(file)
+>>>>>>> dbtvault_update
 
 
 def create_dummy_model():
@@ -155,10 +203,13 @@ def is_successful_run(dbt_logs: str):
     return 'Done' in dbt_logs and 'SQL compilation error' not in dbt_logs
 
 
+<<<<<<< HEAD
 def is_pipeline():
     return os.getenv('CIRCLE_NODE_INDEX') and os.getenv('CIRCLE_JOB') and os.getenv('CIRCLE_BRANCH')
 
 
+=======
+>>>>>>> dbtvault_update
 def parse_hashdiffs(columns_as_series: Series) -> Series:
     """
     Evaluate strings surrounded with hashdiff() and exclude_hashdiff() to
@@ -197,8 +248,13 @@ def parse_hashdiffs(columns_as_series: Series) -> Series:
 
 def parse_lists_in_dicts(dicts_with_lists: List[dict]) -> list:
     """
+<<<<<<< HEAD
     Convert string representations of lists in dict values, in a list of dicts
         :param dicts_with_lists: A list of dictionaries
+=======
+    Convert string representations of lists in dict values, in a list of dicts, or a dict containing list/dict values
+        :param dicts_with_lists: A list of dictionaries, or a dict containing list/dict values
+>>>>>>> dbtvault_update
     """
 
     if isinstance(dicts_with_lists, list):
@@ -227,6 +283,41 @@ def parse_lists_in_dicts(dicts_with_lists: List[dict]) -> list:
                     processed_dicts[i] = {col: dicts_with_lists[i]}
 
             return processed_dicts
+<<<<<<< HEAD
+=======
+
+    elif isinstance(dicts_with_lists, dict):
+
+        processed_dicts = []
+        d = []
+
+        check_dicts = [k2 for k2, v2 in dicts_with_lists.items() if isinstance(k2, int) and isinstance(v2, dict)]
+
+        if not check_dicts:
+            return dicts_with_lists
+        else:
+
+            for k1, v1 in dicts_with_lists.items():
+                processed_dicts.append(dict())
+                d.append(dict())
+
+                if isinstance(v1, dict):
+                    for k, v in v1.items():
+
+                        if {"[", "]"}.issubset(set(str(v))) and isinstance(v, str):
+                            v = v.replace("[", "")
+                            v = v.replace("]", "")
+                            v = [k.strip() for k in v.split(",")]
+
+                        d[k1][k] = v
+                else:
+                    d = dicts_with_lists[k1]
+
+                processed_dicts[k1] = {k1: d[k1]}
+
+            return processed_dicts
+
+>>>>>>> dbtvault_update
     else:
         return dicts_with_lists
 
@@ -300,6 +391,7 @@ def calc_hash(columns_as_series: Series) -> Series:
     return Series(hashed_list)
 
 
+<<<<<<< HEAD
 def set_custom_names():
     """
     Database and schema names for generated SQL during macro tests changes based on user.
@@ -332,6 +424,8 @@ def set_custom_names():
         return {k: sanitise_strings(v) for k, v in local_metadata[platform()].items()}
 
 
+=======
+>>>>>>> dbtvault_update
 def run_dbt_command(command) -> str:
     """
     Run a command in dbt and capture dbt logs.
@@ -345,6 +439,7 @@ def run_dbt_command(command) -> str:
         command = ['dbt', command]
 
     joined_command = " ".join(command)
+<<<<<<< HEAD
     test.logger.log(msg=f"Running with dbt command: {joined_command}", level=logging.INFO)
     child = pexpect.spawn(command=joined_command, cwd=test.TESTS_DBT_ROOT, encoding="utf-8")
 
@@ -359,15 +454,44 @@ def run_dbt_command(command) -> str:
 
 
 def run_dbt_seed(seed_file_name=None) -> str:
+=======
+
+    test.logger.log(msg=f"Running on platform {str(env_utils.platform()).upper()}", level=logging.INFO)
+
+    test.logger.log(msg=f"Running with dbt command: {joined_command}", level=logging.INFO)
+
+    child = pexpect.spawn(command=joined_command, cwd=test.TEST_PROJECT_ROOT, encoding="utf-8", timeout=1000)
+    child.logfile_read = sys.stdout
+    logs = child.read()
+    child.close()
+
+    return logs
+
+
+def run_dbt_seeds(seed_file_names=None, full_refresh=False) -> str:
+>>>>>>> dbtvault_update
     """
     Run seed files in dbt
         :return: dbt logs
     """
 
+<<<<<<< HEAD
     command = ['dbt', 'seed']
 
     if seed_file_name:
         command.extend(['--select', seed_file_name, '--full-refresh'])
+=======
+    if isinstance(seed_file_names, str):
+        seed_file_names = [seed_file_names]
+
+    command = ['dbt', 'seed']
+
+    if seed_file_names:
+        command.extend(['--select', " ".join(seed_file_names), '--full-refresh'])
+
+    if "full-refresh" not in command and full_refresh:
+        command.append('--full-refresh')
+>>>>>>> dbtvault_update
 
     return run_dbt_command(command)
 
@@ -404,6 +528,10 @@ def run_dbt_models(*, mode='compile', model_names: list, args=None, full_refresh
         command.append('--full-refresh')
 
     if args:
+<<<<<<< HEAD
+=======
+        args = json.dumps(args)
+>>>>>>> dbtvault_update
         command.extend([f"--vars '{args}'"])
 
     return run_dbt_command(command)
@@ -420,7 +548,11 @@ def run_dbt_operation(macro_name: str, args=None) -> str:
 
     if args:
         args = str(args).replace('\'', '')
+<<<<<<< HEAD
         command.extend(['--args', f"'{args}'"])
+=======
+        command.extend([f"--args '{args}'"])
+>>>>>>> dbtvault_update
 
     return run_dbt_command(command)
 
@@ -454,7 +586,11 @@ def context_table_to_df(table: Table, use_nan=True) -> pd.DataFrame:
     Converts a context table in a feature file into a pandas DataFrame
         :param table: The context.table from a scenario
         :param use_nan: Replace <null> placeholder with NaN
+<<<<<<< HEAD
         :return: DataFrame representation of the provide context table
+=======
+        :return: DataFrame representation of the provided context table
+>>>>>>> dbtvault_update
     """
 
     table_df = pd.DataFrame(columns=table.headings, data=table.rows)
@@ -478,7 +614,11 @@ def context_table_to_csv(table: Table, model_name: str) -> str:
 
     table_df = context_table_to_df(table)
 
+<<<<<<< HEAD
     csv_fqn = test.CSV_DIR / f'{model_name.lower()}_seed.csv'
+=======
+    csv_fqn = test.TEMP_SEED_DIR / f'{model_name.lower()}_seed.csv'
+>>>>>>> dbtvault_update
 
     table_df.to_csv(path_or_buf=csv_fqn, index=False)
 
@@ -487,13 +627,21 @@ def context_table_to_csv(table: Table, model_name: str) -> str:
     return csv_fqn.stem
 
 
+<<<<<<< HEAD
 def context_table_to_dicts(table: Table, orient='index', use_nan=True) -> List[dict]:
+=======
+def context_table_to_dicts(table: Table, orient='index', use_nan=True) -> dict:
+>>>>>>> dbtvault_update
     """
     Converts a context table in a feature file into a list of dictionaries
         :param use_nan:
         :param table: The context.table from a scenario
         :param orient: orient for df to_dict
+<<<<<<< HEAD
         :return: A dictionary modelled from a context table
+=======
+        :return: A list containing a dictionary modelled from a context table
+>>>>>>> dbtvault_update
     """
 
     table_df = context_table_to_df(table, use_nan=use_nan)
@@ -506,9 +654,17 @@ def context_table_to_dicts(table: Table, orient='index', use_nan=True) -> List[d
 
 
 # TODO: Look into re-factoring and testing
+<<<<<<< HEAD
 def context_table_to_model(seed_config: dict, table: Table, model_name: str, target_model_name: str):
     """
     Creates a model from a feature file data table
+=======
+# TODO: replace hard coded square brackets with a function call that mimics internal macro escape_column_name()
+def context_table_to_model(seed_config: dict, table: Table, model_name: str, target_model_name: str):
+    """
+    Creates a model from a feature file data table
+    This is ONLY for dbt-sqlserver where a model is being used as a seed to avoid implicit data type conversion issues
+>>>>>>> dbtvault_update
         :param seed_config: Configuration dict for seed file
         :param table: The context.table from a scenario or a programmatically defined table
         :param model_name: Name of the model to base the feature data table on
@@ -516,6 +672,7 @@ def context_table_to_model(seed_config: dict, table: Table, model_name: str, tar
         :return: Seed file name
     """
 
+<<<<<<< HEAD
     feature_data = context_table_to_dicts(table=table, orient="index", use_nan=False)
     column_types = seed_config[model_name]["+column_types"]
 
@@ -551,6 +708,56 @@ def context_table_to_model(seed_config: dict, table: Table, model_name: str, tar
                 expression = f"CAST({column_data_for_sql} AS {column_type})"
 
             sql_command = f"{sql_command}{expression} AS {column_name} "
+=======
+    feature_data_list = context_table_to_dicts(table=table, orient="index", use_nan=False)
+    column_types = seed_config[model_name]["column_types"]
+
+    sql_command = ""
+
+    if len(feature_data_list) == 0:
+        # Empty table
+        if len(column_types) > 0:
+            select_column_list = []
+
+            for column_name in column_types.keys():
+                column_type = column_types[column_name]
+
+                if env_utils.platform() == "sqlserver" and column_type[0:6].upper() == "BINARY":
+                    expression = f"CONVERT({column_type}, NULL, 2)"
+                else:
+                    expression = f"CAST(NULL AS {column_type})"
+
+                select_column_list.append(f"{expression} AS [{column_name}]")
+
+            sql_command = "SELECT " + ",".join(select_column_list) + " WHERE 1=0"
+
+    else:
+        sql_command_list = []
+
+        for feature_data in feature_data_list:
+            for row_number in feature_data.keys():
+                select_column_list = []
+
+                for column_name in feature_data[row_number].keys():
+                    column_data = feature_data[row_number][column_name]
+                    column_type = column_types[column_name]
+
+                    if column_data.lower() == "<null>" or column_data == "":
+                        column_data_for_sql = "NULL"
+                    else:
+                        column_data_for_sql = f"'{column_data}'"
+
+                    if env_utils.platform() == "sqlserver" and column_type[0:6].upper() == "BINARY":
+                        expression = f"CONVERT({column_type}, {column_data_for_sql}, 2)"
+                    else:
+                        expression = f"CAST({column_data_for_sql} AS {column_type})"
+
+                    select_column_list.append(f"{expression} AS [{column_name}]")
+
+                sql_command_list.append("SELECT " + ",".join(select_column_list))
+
+        sql_command = "\nUNION ALL\n".join(sql_command_list)
+>>>>>>> dbtvault_update
 
     with open(test.TEST_MODELS_ROOT / f"{target_model_name.lower()}_seed.sql", "w") as f:
         f.write(sql_command)
@@ -614,9 +821,172 @@ def retrieve_expected_sql(request: FixtureRequest):
     model_name = request.node.name
 
     with open(test.TEST_MACRO_ROOT / macro_folder / "expected" /
+<<<<<<< HEAD
               macro_under_test / platform() / f'{model_name}.sql') as f:
         file = f.readlines()
 
         processed_file = inject_parameters("".join(file), set_custom_names())
 
         return processed_file
+=======
+              macro_under_test / env_utils.platform() / f'{model_name}.sql') as f:
+        file = f.readlines()
+
+        processed_file = inject_parameters("".join(file), env_utils.set_qualified_names_for_macro_tests())
+
+        return processed_file
+
+
+def feature_sub_types():
+    return {
+        'hubs': {
+            'main': [
+                'hubs'
+            ],
+            'comppk': [
+                'hubs_comppk'
+            ],
+            'incremental': [
+                'hubs_incremental'
+            ],
+            'pm': [
+                'hubs_period_mat'
+            ],
+            'rank': [
+                'hubs_rank_mat'
+            ]
+        },
+        'links': {
+            'main': [
+                'links',
+                'links_comppk'
+            ],
+            'incremental': [
+                'links_incremental'
+            ],
+            'pm': [
+                'links_period_mat'
+            ],
+            'rank': [
+                'links_rank_mat'
+            ]
+        },
+        'sats': {
+            'main': [
+                'sats',
+            ],
+            'cycles': [
+                'sats_cycles'
+            ],
+            'incremental': [
+                'sats_incremental'
+            ],
+            'pm': [
+                'sats_period_mat_base',
+                'sats_period_mat_other'
+                'sats_period_mat_inferred_range',
+                'sats_period_mat_provided_range',
+                'sats_daily',
+                'sats_monthly'
+            ],
+            'rank': [
+                'sats_rank_mat'
+            ]
+        },
+        'eff_sats': {
+            'main': [
+                'eff_sats',
+                'eff_sats_multi_part'
+            ],
+            'auto': [
+                'eff_sats_auto_end_dating_detail_base',
+                'eff_sats_auto_end_dating_detail_inc',
+                'eff_sats_auto_end_dating_incremental'
+            ],
+            'disabled': [
+                'eff_sats_disabled_end_dating',
+                'eff_sats_disabled_end_dating_closed_records',
+                'eff_sats_disabled_end_dating_incremental'
+            ],
+            'mat': [
+                'eff_sats_period_mat',
+                'eff_sats_rank_mat'
+            ]
+        },
+        'ma_sats': {
+            '1cdk': [
+                'mas_one_cdk_0_base',
+                'mas_one_cdk_1_inc',
+                'mas_one_cdk_base_sats'
+            ],
+            '1cdk_cycles': [
+                'mas_one_cdk_base_sats_cycles',
+                'mas_one_cdk_cycles_duplicates'
+            ],
+            '2cdk': [
+                'mas_two_cdk_0_base',
+                'mas_two_cdk_1_inc',
+                'mas_two_cdk_base_sats'
+            ],
+            '2cdk_cycles': [
+                'mas_two_cdk_base_sats_cycles',
+                'mas_two_cdk_cycles_duplicates'
+            ],
+            'incremental': [
+                'mas_one_cdk_incremental',
+                'mas_two_cdk_incremental'
+            ],
+            'pm': [
+                'mas_period_mat',
+                'mas_one_cdk_period_duplicates',
+                'mas_two_cdk_period_duplicates'
+            ],
+            'rm': [
+                'mas_rank_mat',
+                'mas_one_cdk_base_sats_rank_mat'
+            ],
+            'rm_dup': [
+                'mas_one_cdk_rank_duplicates',
+                'mas_two_cdk_rank_duplicates'
+            ]
+        },
+        'xts': {
+            'main': [
+                'xts',
+                'xts_comppk'
+            ],
+            'incremental': [
+                'xts_incremental'
+            ]
+        },
+        'pit': {
+            'main': [
+                'pit'
+            ],
+            '1sat_base': [
+                'pit_one_sat_base',
+            ],
+            '1sat_inc': [
+                'pit_one_sat_inc'
+            ],
+            '2sat': [
+                'pit_two_sat_base',
+                'pit_two_sat_inc'
+            ]
+        },
+        'bridge': {
+            'inc': [
+                'bridge_incremental'
+            ],
+            '1link': [
+                'bridge_one_hub_one_link'
+            ],
+            '2link': [
+                'bridge_one_hub_two_links'
+            ],
+            '3link': [
+                'bridge_one_hub_three_links'
+            ]
+        },
+    }
+>>>>>>> dbtvault_update

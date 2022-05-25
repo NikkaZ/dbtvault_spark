@@ -1,8 +1,15 @@
 from behave import fixture
 
 
+<<<<<<< HEAD
 @fixture
 def satellite(context):
+=======
+# Snowflake
+
+@fixture
+def satellite_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to load satellites
     """
@@ -46,6 +53,17 @@ def satellite(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -58,7 +76,11 @@ def satellite(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -68,7 +90,11 @@ def satellite(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -78,7 +104,11 @@ def satellite(context):
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -89,8 +119,25 @@ def satellite(context):
                 "SOURCE": "VARCHAR"
             }
         },
+<<<<<<< HEAD
         "SATELLITE_TS": {
             "+column_types": {
+=======
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR",
+                "CUSTOMER_PHONE": "VARCHAR",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "VARCHAR"
+            }
+        },
+        "SATELLITE_TS": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -105,7 +152,11 @@ def satellite(context):
 
 
 @fixture
+<<<<<<< HEAD
 def satellite_cycle(context):
+=======
+def satellite_cycle_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to perform load cycles for satellites
     """
@@ -146,7 +197,11 @@ def satellite_cycle(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_DOB": "DATE",
@@ -156,7 +211,11 @@ def satellite_cycle(context):
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_DOB": "DATE",
@@ -169,6 +228,12 @@ def satellite_cycle(context):
     }
 
 
+<<<<<<< HEAD
+=======
+# BigQuery
+
+
+>>>>>>> dbtvault_update
 @fixture
 def satellite_bigquery(context):
     """
@@ -214,6 +279,17 @@ def satellite_bigquery(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -226,7 +302,11 @@ def satellite_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -236,17 +316,29 @@ def satellite_bigquery(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
                 "CUSTOMER_DOB": "DATETIME",
+=======
+            "column_types": {
+                "CUSTOMER_ID": "STRING",
+                "CUSTOMER_NAME": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "CUSTOMER_DOB": "DATE",
+>>>>>>> dbtvault_update
                 "LOAD_DATETIME": "DATETIME",
                 "SOURCE": "STRING"
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -257,12 +349,33 @@ def satellite_bigquery(context):
                 "SOURCE": "STRING"
             }
         },
+<<<<<<< HEAD
         "SATELLITE_TS": {
             "+column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
                 "CUSTOMER_DOB": "DATETIME",
+=======
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "STRING",
+                "CUSTOMER_NAME": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "STRING",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "STRING"
+            }
+        },
+        "SATELLITE_TS": {
+            "column_types": {
+                "CUSTOMER_PK": "STRING",
+                "CUSTOMER_NAME": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "CUSTOMER_DOB": "DATE",
+>>>>>>> dbtvault_update
                 "HASHDIFF": "STRING",
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
@@ -314,7 +427,11 @@ def satellite_cycle_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_DOB": "DATE",
@@ -324,7 +441,11 @@ def satellite_cycle_bigquery(context):
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_DOB": "DATE",
@@ -337,6 +458,12 @@ def satellite_cycle_bigquery(context):
     }
 
 
+<<<<<<< HEAD
+=======
+# SQLServer
+
+
+>>>>>>> dbtvault_update
 @fixture
 def satellite_sqlserver(context):
     """
@@ -382,6 +509,17 @@ def satellite_sqlserver(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_payload": ["CUSTOMER_NAME", "CUSTOMER_PHONE", "CUSTOMER_DOB"],
@@ -394,7 +532,11 @@ def satellite_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -404,17 +546,29 @@ def satellite_sqlserver(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
+<<<<<<< HEAD
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -425,15 +579,37 @@ def satellite_sqlserver(context):
                 "SOURCE": "VARCHAR(50)"
             }
         },
+<<<<<<< HEAD
         "SATELLITE_TS": {
             "+column_types": {
+=======
+        "SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "CUSTOMER_DOB": "DATE",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATE",
+                "LOAD_DATE": "DATE",
+                "SOURCE": "VARCHAR(50)"
+            }
+        },
+        "SATELLITE_TS": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
                 "HASHDIFF": "BINARY(16)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         }
@@ -482,7 +658,11 @@ def satellite_cycle_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
@@ -492,7 +672,11 @@ def satellite_cycle_sqlserver(context):
             }
         },
         "SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",

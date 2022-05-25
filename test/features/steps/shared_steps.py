@@ -3,6 +3,10 @@ import copy
 from behave import *
 from behave.model import Table, Row
 
+<<<<<<< HEAD
+=======
+from env import env_utils
+>>>>>>> dbtvault_update
 from test import dbtvault_generator
 from test import dbtvault_harness_utils
 
@@ -60,7 +64,10 @@ def check_exists(context, model_name):
     assert f"Model {model_name} does not exist." in logs
 
 
+<<<<<<< HEAD
 # TODO: Re-factor this so it is only one dbt run instead of looping
+=======
+>>>>>>> dbtvault_update
 @given("the raw vault contains empty tables")
 def clear_schema(context):
     dbtvault_harness_utils.replace_test_schema()
@@ -72,6 +79,11 @@ def clear_schema(context):
 
     models = [name for name in dbtvault_generator.flatten([v for k, v in model_names.items()]) if name]
 
+<<<<<<< HEAD
+=======
+    seed_file_names = []
+
+>>>>>>> dbtvault_update
     for model_name in models:
         headings_dict = dbtvault_generator.evaluate_hashdiff(copy.deepcopy(context.vault_structure_columns[model_name]))
 
@@ -87,9 +99,17 @@ def clear_schema(context):
         dbtvault_generator.add_seed_config(seed_name=seed_file_name,
                                            seed_config=context.seed_config[model_name])
 
+<<<<<<< HEAD
         logs = dbtvault_harness_utils.run_dbt_seed(seed_file_name=seed_file_name)
 
         assert "Completed successfully" in logs
+=======
+        seed_file_names.append(seed_file_name)
+
+    logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=seed_file_names)
+
+    assert "Completed successfully" in logs
+>>>>>>> dbtvault_update
 
 
 @step("the {model_name} {vault_structure} is empty")
@@ -115,7 +135,11 @@ def load_empty_table(context, model_name, vault_structure):
     dbtvault_generator.add_seed_config(seed_name=seed_file_name,
                                        seed_config=context.seed_config[model_name])
 
+<<<<<<< HEAD
     logs = dbtvault_harness_utils.run_dbt_seed(seed_file_name=seed_file_name)
+=======
+    logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+>>>>>>> dbtvault_update
 
     if getattr(context, "create_empty_stage", False) and getattr(context, "empty_stage_name", False):
         source_model_name = context.empty_stage_name
@@ -136,7 +160,11 @@ def load_empty_table(context, model_name, vault_structure):
 
 @given("I have an empty {raw_stage_name} raw stage")
 def create_empty_stage(context, raw_stage_name):
+<<<<<<< HEAD
     stage_headings = list(context.seed_config[raw_stage_name]["+column_types"].keys())
+=======
+    stage_headings = list(context.seed_config[raw_stage_name]["column_types"].keys())
+>>>>>>> dbtvault_update
 
     row = Row(cells=[], headings=stage_headings)
 
@@ -152,7 +180,11 @@ def create_empty_stage(context, raw_stage_name):
     dbtvault_generator.add_seed_config(seed_name=seed_file_name,
                                        seed_config=context.seed_config[raw_stage_name])
 
+<<<<<<< HEAD
     logs = dbtvault_harness_utils.run_dbt_seed(seed_file_name=seed_file_name)
+=======
+    logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+>>>>>>> dbtvault_update
 
     context.raw_stage_name = raw_stage_name
 
@@ -161,7 +193,11 @@ def create_empty_stage(context, raw_stage_name):
 
 @given("I have an empty {processed_stage_name} primed stage")
 def create_empty_stage(context, processed_stage_name):
+<<<<<<< HEAD
     stage_source_column_headings = list(context.seed_config[context.raw_stage_name]["+column_types"].keys())
+=======
+    stage_source_column_headings = list(context.seed_config[context.raw_stage_name]["column_types"].keys())
+>>>>>>> dbtvault_update
     stage_hashed_column_headings = list(context.hashed_columns[processed_stage_name].keys())
     stage_derived_column_headings = list(context.derived_columns[processed_stage_name].keys())
     stage_headings = stage_source_column_headings + stage_hashed_column_headings + stage_derived_column_headings
@@ -180,7 +216,11 @@ def create_empty_stage(context, processed_stage_name):
     dbtvault_generator.add_seed_config(seed_name=seed_file_name,
                                        seed_config=context.seed_config[processed_stage_name])
 
+<<<<<<< HEAD
     logs = dbtvault_harness_utils.run_dbt_seed(seed_file_name=seed_file_name)
+=======
+    logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+>>>>>>> dbtvault_update
 
     assert "Completed successfully" in logs
 
@@ -192,6 +232,7 @@ def load_populated_table(context, model_name, vault_structure):
     Create a table with data pre-populated from the context table.
     """
 
+<<<<<<< HEAD
     context.target_model_name = model_name
 
     seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
@@ -211,6 +252,58 @@ def load_populated_table(context, model_name, vault_structure):
     logs = dbtvault_harness_utils.run_dbt_models(mode="run", model_names=[model_name])
 
     assert "Completed successfully" in logs
+=======
+    if env_utils.platform() == "sqlserver":
+        # Workaround for MSSQL not permitting certain implicit data type conversions while loading nvarchar csv file data
+        # into expected data table, e.g. nvarchar -- > binary
+
+        seed_model_name = dbtvault_harness_utils.context_table_to_model(context.seed_config, context.table,
+                                                                        model_name=model_name,
+                                                                        target_model_name=model_name)
+
+        context.target_model_name = model_name
+
+        metadata = {"source_model": seed_model_name, **context.vault_structure_columns[model_name]}
+
+        context.vault_structure_metadata = metadata
+
+        dbtvault_generator.raw_vault_structure(model_name, vault_structure, **metadata)
+
+        seed_logs = dbtvault_harness_utils.run_dbt_seed_model(seed_model_name=seed_model_name)
+
+        metadata = {"source_model": seed_model_name, **context.vault_structure_columns[model_name]}
+
+        context.vault_structure_metadata = metadata
+
+        dbtvault_generator.raw_vault_structure(model_name, vault_structure, **metadata)
+
+        logs = dbtvault_harness_utils.run_dbt_models(mode="run", model_names=[model_name])
+
+        assert "Completed successfully" in seed_logs
+        assert "Completed successfully" in logs
+
+    else:
+
+        context.target_model_name = model_name
+
+        seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
+                                                                     model_name=model_name)
+
+        dbtvault_generator.add_seed_config(seed_name=seed_file_name,
+                                           seed_config=context.seed_config[model_name])
+
+        dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+
+        metadata = {"source_model": seed_file_name, **context.vault_structure_columns[model_name]}
+
+        context.vault_structure_metadata = metadata
+
+        dbtvault_generator.raw_vault_structure(model_name, vault_structure, **metadata)
+
+        logs = dbtvault_harness_utils.run_dbt_models(mode="run", model_names=[model_name])
+
+        assert "Completed successfully" in logs
+>>>>>>> dbtvault_update
 
 
 @step("I load the {model_name} {vault_structure}")
@@ -261,6 +354,7 @@ def load_vault(context):
 def create_csv(context, raw_stage_model_name):
     """Creates a CSV file in the data folder"""
 
+<<<<<<< HEAD
     seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
                                                                  model_name=raw_stage_model_name)
 
@@ -274,12 +368,51 @@ def create_csv(context, raw_stage_model_name):
     context.raw_stage_model_name = raw_stage_model_name
 
     assert "Completed successfully" in logs
+=======
+    if env_utils.platform() == "sqlserver":
+        # Workaround for MSSQL not permitting certain implicit data type conversions while loading nvarchar csv file data
+        # into expected data table, e.g. nvarchar -- > binary
+
+        # Delete any seed CSV file created by an earlier step to avoid dbt conflict with the seed table about to be created
+        dbtvault_harness_utils.clean_seeds(raw_stage_model_name.lower() + "_seed")
+
+        seed_model_name = dbtvault_harness_utils.context_table_to_model(context.seed_config, context.table,
+                                                                        model_name=raw_stage_model_name,
+                                                                        target_model_name=raw_stage_model_name)
+
+        context.target_model_name = raw_stage_model_name
+
+        logs = dbtvault_harness_utils.run_dbt_seed_model(seed_model_name=seed_model_name)
+
+        context.raw_stage_models = seed_model_name
+
+        context.raw_stage_model_name = raw_stage_model_name
+
+        assert "Completed successfully" in logs
+
+    else:
+
+        seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
+                                                                     model_name=raw_stage_model_name)
+
+        dbtvault_generator.add_seed_config(seed_name=seed_file_name,
+                                           seed_config=context.seed_config[raw_stage_model_name])
+
+        logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+
+        context.raw_stage_models = seed_file_name
+
+        context.raw_stage_model_name = raw_stage_model_name
+
+        assert "Completed successfully" in logs
+>>>>>>> dbtvault_update
 
 
 @step("the {table_name} table is created and populated with data")
 def create_csv(context, table_name):
     """Creates a CSV file in the data folder, creates a seed table, and then loads a table using the seed table"""
 
+<<<<<<< HEAD
     seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
                                                                  model_name=table_name)
 
@@ -304,6 +437,66 @@ def create_csv(context, table_name):
 
     assert "Completed successfully" in seed_logs
     assert "Completed successfully" in run_logs
+=======
+    if env_utils.platform() == "sqlserver":
+        # Workaround for MSSQL not permitting certain implicit data type conversions while loading nvarchar csv file data
+        # into expected data table, e.g. nvarchar -- > binary
+
+        # Delete any seed CSV file created by an earlier step to avoid dbt conflict with the seed table about to be created
+        dbtvault_harness_utils.clean_seeds(table_name.lower() + "_seed")
+
+        seed_model_name = dbtvault_harness_utils.context_table_to_model(context.seed_config, context.table,
+                                                                        model_name=table_name,
+                                                                        target_model_name=table_name)
+
+        context.target_model_name = table_name
+
+        seed_logs = dbtvault_harness_utils.run_dbt_seed_model(seed_model_name=seed_model_name)
+
+        stage_metadata = set_stage_metadata(context, stage_model_name=table_name)
+
+        args = {k: v for k, v in stage_metadata.items() if k == "hash"}
+
+        dbtvault_generator.raw_vault_structure(model_name=table_name,
+                                               vault_structure='stage',
+                                               source_model=seed_model_name,
+                                               config={'materialized': 'table'})
+
+        run_logs = dbtvault_harness_utils.run_dbt_models(mode="run", model_names=[table_name],
+                                                         args=args, full_refresh=True)
+
+        context.raw_stage_models = seed_model_name
+
+        assert "Completed successfully" in seed_logs
+        assert "Completed successfully" in run_logs
+
+    else:
+
+        seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
+                                                                     model_name=table_name)
+
+        dbtvault_generator.add_seed_config(seed_name=seed_file_name,
+                                           seed_config=context.seed_config[table_name])
+
+        seed_logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+
+        stage_metadata = set_stage_metadata(context, stage_model_name=table_name)
+
+        args = {k: v for k, v in stage_metadata.items() if k == "hash"}
+
+        dbtvault_generator.raw_vault_structure(model_name=table_name,
+                                               vault_structure='stage',
+                                               source_model=seed_file_name,
+                                               config={'materialized': 'table'})
+
+        run_logs = dbtvault_harness_utils.run_dbt_models(mode="run", model_names=[table_name],
+                                                         args=args, full_refresh=True)
+
+        context.raw_stage_models = seed_file_name
+
+        assert "Completed successfully" in seed_logs
+        assert "Completed successfully" in run_logs
+>>>>>>> dbtvault_update
 
 
 @step("the {raw_stage_model_name} is loaded")
@@ -311,6 +504,7 @@ def create_csv(context, raw_stage_model_name):
     """Creates a CSV file in the data folder
     """
 
+<<<<<<< HEAD
     context.raw_stage_model_name = raw_stage_model_name
 
     seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
@@ -324,6 +518,46 @@ def create_csv(context, raw_stage_model_name):
     context.raw_stage_models = seed_file_name
 
     assert "Completed successfully" in logs
+=======
+    if env_utils.platform() == "sqlserver":
+        # Workaround for MSSQL not permitting certain implicit data type conversions while loading nvarchar csv file data
+        # into expected data table, e.g. nvarchar -- > binary
+
+        # Delete any seed CSV file created by an earlier step to avoid dbt conflict with the seed table about to be created
+        # For MSSQL must delete any existing copy of the seed file if present, e.g. multiple loads
+        # For Snowflake deletion of seed file is not required but does not cause a problem if performed
+        dbtvault_harness_utils.clean_seeds(raw_stage_model_name.lower() + "_seed")
+
+        context.raw_stage_model_name = raw_stage_model_name
+
+        seed_model_name = dbtvault_harness_utils.context_table_to_model(context.seed_config, context.table,
+                                                                        model_name=raw_stage_model_name,
+                                                                        target_model_name=raw_stage_model_name)
+
+        context.target_model_name = raw_stage_model_name
+
+        logs = dbtvault_harness_utils.run_dbt_seed_model(seed_model_name=seed_model_name)
+
+        context.raw_stage_models = seed_model_name
+
+        assert "Completed successfully" in logs
+
+    else:
+
+        context.raw_stage_model_name = raw_stage_model_name
+
+        seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
+                                                                     model_name=raw_stage_model_name)
+
+        dbtvault_generator.add_seed_config(seed_name=seed_file_name,
+                                           seed_config=context.seed_config[raw_stage_model_name])
+
+        logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+
+        context.raw_stage_models = seed_file_name
+
+        assert "Completed successfully" in logs
+>>>>>>> dbtvault_update
 
 
 @step("I stage the {processed_stage_name} data")
@@ -348,6 +582,7 @@ def stage_processing(context, processed_stage_name):
 
 @then("the {model_name} table should contain expected data")
 def expect_data(context, model_name):
+<<<<<<< HEAD
     expected_output_csv_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
                                                                            model_name=f"{model_name}_expected")
 
@@ -370,10 +605,68 @@ def expect_data(context, model_name):
     logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
 
     assert "1 of 1 PASS" in logs
+=======
+    if env_utils.platform() == "sqlserver":
+        # Workaround for MSSQL not permitting certain implicit data type conversions while loading nvarchar csv file data
+        # into expected data table, e.g. nvarchar -- > binary
+
+        # Delete any seed CSV or model SQL file created by an earlier step to avoid dbt conflict with the seed table about to be created
+        dbtvault_harness_utils.clean_seeds(model_name.lower() + "_expected_seed")
+        dbtvault_harness_utils.clean_models(model_name.lower() + "_expected_seed")
+
+        seed_model_name = dbtvault_harness_utils.context_table_to_model(context.seed_config, context.table,
+                                                                        model_name=model_name,
+                                                                        target_model_name=f"{model_name}_EXPECTED")
+
+        context.target_model_name = seed_model_name
+
+        seed_logs = dbtvault_harness_utils.run_dbt_seed_model(seed_model_name=seed_model_name)
+
+        columns_to_compare = context.table.headings
+        unique_id = columns_to_compare[0]
+
+        test_yaml = dbtvault_generator.create_test_model_schema_dict(target_model_name=model_name,
+                                                                     expected_output_csv=seed_model_name,
+                                                                     unique_id=unique_id,
+                                                                     columns_to_compare=columns_to_compare)
+
+        dbtvault_generator.append_dict_to_schema_yml(test_yaml)
+
+        logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
+
+        assert "Completed successfully" in seed_logs
+        assert "1 of 1 PASS" in logs
+
+    else:
+
+        expected_output_csv_name = dbtvault_harness_utils.context_table_to_csv(table=context.table,
+                                                                               model_name=f"{model_name}_expected")
+
+        columns_to_compare = context.table.headings
+        unique_id = columns_to_compare[0]
+
+        test_yaml = dbtvault_generator.create_test_model_schema_dict(target_model_name=model_name,
+                                                                     expected_output_csv=expected_output_csv_name,
+                                                                     unique_id=unique_id,
+                                                                     columns_to_compare=columns_to_compare)
+
+        dbtvault_generator.append_dict_to_schema_yml(test_yaml)
+
+        dbtvault_generator.add_seed_config(seed_name=expected_output_csv_name,
+                                           include_columns=columns_to_compare,
+                                           seed_config=context.seed_config[model_name])
+
+        dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[expected_output_csv_name])
+
+        logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
+
+        assert "1 of 1 PASS" in logs
+>>>>>>> dbtvault_update
 
 
 @then("the {model_name} table should be empty")
 def expect_data(context, model_name):
+<<<<<<< HEAD
     table_headings = list(context.seed_config[model_name]["+column_types"].keys())
     row = Row(cells=[], headings=table_headings)
 
@@ -401,3 +694,72 @@ def expect_data(context, model_name):
     logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
 
     assert "1 of 1 PASS" in logs
+=======
+    if env_utils.platform() == "sqlserver":
+
+        # Delete any seed CSV or model SQL file created by an earlier step to avoid dbt conflict with the seed table about to be created
+        dbtvault_harness_utils.clean_seeds(model_name.lower() + "_expected_seed")
+        dbtvault_harness_utils.clean_models(model_name.lower() + "_expected_seed")
+
+        # Create seed file with no data rows
+        expected_model_name = f"{model_name}_EXPECTED"
+
+        table_headings = list(context.seed_config[model_name]["column_types"].keys())
+        row = Row(cells=[], headings=table_headings)
+
+        empty_table = Table(headings=table_headings, rows=row)
+
+        seed_file_name = dbtvault_harness_utils.context_table_to_csv(table=empty_table,
+                                                                     model_name=expected_model_name)
+
+        # Create empty expected data table using empty seed file
+        dbtvault_generator.add_seed_config(seed_name=seed_file_name,
+                                           seed_config=context.seed_config[model_name])
+
+        seed_logs = dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[seed_file_name])
+
+        # Run comparison test between target table and expected data table
+        unique_id = context.vault_structure_columns[model_name]['src_pk']
+
+        test_yaml = dbtvault_generator.create_test_model_schema_dict(target_model_name=model_name,
+                                                                     expected_output_csv=seed_file_name,
+                                                                     unique_id=unique_id,
+                                                                     columns_to_compare=table_headings)
+
+        dbtvault_generator.append_dict_to_schema_yml(test_yaml)
+
+        logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
+
+        assert "Completed successfully" in seed_logs
+        assert "1 of 1 PASS" in logs
+
+    else:
+
+        table_headings = list(context.seed_config[model_name]["column_types"].keys())
+        row = Row(cells=[], headings=table_headings)
+
+        empty_table = Table(headings=table_headings, rows=row)
+
+        expected_output_csv_name = dbtvault_harness_utils.context_table_to_csv(table=empty_table,
+                                                                               model_name=f"{model_name}_expected")
+
+        columns_to_compare = table_headings
+        unique_id = columns_to_compare[0]
+
+        test_yaml = dbtvault_generator.create_test_model_schema_dict(target_model_name=model_name,
+                                                                     expected_output_csv=expected_output_csv_name,
+                                                                     unique_id=unique_id,
+                                                                     columns_to_compare=columns_to_compare)
+
+        dbtvault_generator.append_dict_to_schema_yml(test_yaml)
+
+        dbtvault_generator.add_seed_config(seed_name=expected_output_csv_name,
+                                           include_columns=columns_to_compare,
+                                           seed_config=context.seed_config[model_name])
+
+        dbtvault_harness_utils.run_dbt_seeds(seed_file_names=[expected_output_csv_name])
+
+        logs = dbtvault_harness_utils.run_dbt_command(["dbt", "test"])
+
+        assert "1 of 1 PASS" in logs
+>>>>>>> dbtvault_update

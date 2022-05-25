@@ -1,5 +1,6 @@
 {% materialization vault_insert_by_period, default -%}
 
+<<<<<<< HEAD
     {%- set full_refresh_mode = flags.FULL_REFRESH -%}
 
     {%- set target_relation = this -%}
@@ -7,6 +8,19 @@
     {%- set tmp_relation = make_temp_relation(this) -%}
 
     {%- set timestamp_field = config.require('timestamp_field') -%}
+=======
+    {%- set full_refresh_mode = (should_full_refresh()) -%}
+
+    {% if target.type == "sqlserver" %}
+        {%- set target_relation = this.incorporate(type='table') -%}
+    {%  else %}
+        {%- set target_relation = this -%}
+    {% endif %}
+    {%- set existing_relation = load_relation(this) -%}
+    {%- set tmp_relation = make_temp_relation(target_relation) -%}
+
+    {%- set timestamp_field = dbtvault.escape_column_names(config.require('timestamp_field')) -%}
+>>>>>>> dbtvault_update
     {%- set date_source_models = config.get('date_source_models', default=none) -%}
 
     {%- set start_stop_dates = dbtvault.get_start_stop_dates(timestamp_field, date_source_models) | as_native -%}
@@ -14,8 +28,11 @@
     {%- set period = config.get('period', default='day') -%}
     {%- set to_drop = [] -%}
 
+<<<<<<< HEAD
     {% set adapter_type = dbtvault.get_adapter_type() %}
 
+=======
+>>>>>>> dbtvault_update
     {%- do dbtvault.check_placeholder(sql) -%}
 
     {{ run_hooks(pre_hooks, inside_transaction=False) }}
@@ -32,6 +49,7 @@
         {% set build_sql = create_table_as(False, target_relation, filtered_sql) %}
         {% do to_drop.append(tmp_relation) %}
 
+<<<<<<< HEAD
     {% elif existing_relation.is_view or full_refresh_mode %}
         {#-- Make sure the backup doesn't exist so we don't encounter issues with the rename below #}
         {% set backup_identifier = existing_relation.identifier ~ "__dbt_backup" %}
@@ -39,6 +57,13 @@
 
         {% do adapter.drop_relation(backup_relation) %}
         {% do adapter.rename_relation(target_relation, backup_relation) %}
+=======
+    {% elif existing_relation.is_view %}
+
+        {{ log("Dropping relation " ~ target_relation ~ " because it is a view and this model is a table (vault_insert_by_period).") }}
+        {% do adapter.drop_relation(existing_relation) %}
+        {% set build_sql = create_table_as(False, target_relation, filtered_sql) %}
+>>>>>>> dbtvault_update
 
         {% set filtered_sql = dbtvault.replace_placeholder_with_period_filter(sql, timestamp_field,
                                                                        start_stop_dates.start_date,
@@ -46,8 +71,17 @@
                                                                        0, period) %}
         {% set build_sql = create_table_as(False, target_relation, filtered_sql) %}
 
+<<<<<<< HEAD
         {% do to_drop.append(tmp_relation) %}
         {% do to_drop.append(backup_relation) %}
+=======
+    {% elif full_refresh_mode %}
+        {% set filtered_sql = dbtvault.replace_placeholder_with_period_filter(sql, timestamp_field,
+                                                                       start_stop_dates.start_date,
+                                                                       start_stop_dates.stop_date,
+                                                                       0, period) %}
+        {% set build_sql = create_table_as(False, target_relation, filtered_sql) %}
+>>>>>>> dbtvault_update
     {% else %}
 
         {% set period_boundaries = dbtvault.get_period_boundaries(schema,
@@ -68,7 +102,12 @@
 
             {{ dbt_utils.log_info("Running for {} {} of {} ({}) [{}]".format(period, iteration_number, period_boundaries.num_periods, period_of_load, model.unique_id)) }}
 
+<<<<<<< HEAD
             {% set tmp_relation = make_temp_relation(this) %}
+=======
+            {% set tmp_relation = make_temp_relation(target_relation) %}
+
+>>>>>>> dbtvault_update
             {% set tmp_table_sql = dbtvault.get_period_filter_sql(target_cols_csv, sql, timestamp_field, period,
                                                                   period_boundaries.start_timestamp,
                                                                   period_boundaries.stop_timestamp, i) %}
@@ -108,7 +147,11 @@
                                                                                               period_of_load, rows_inserted,
                                                                                               model.unique_id)) }}
 
+<<<<<<< HEAD
             {% if adapter_type == "sqlserver" %}
+=======
+            {% if target.type == "sqlserver" %}
+>>>>>>> dbtvault_update
                 {# In MSSQL a temporary table can only be dropped by the connection or session that created it #}
                 {# so drop it now before the commit below closes this session #}
                 {%- set drop_query_name = 'DROP_QUERY-' ~ i -%}
@@ -157,6 +200,11 @@
         {% endif %}
     {% endfor %}
 
+<<<<<<< HEAD
+=======
+    {% set target_relation = target_relation.incorporate(type='table') %}
+
+>>>>>>> dbtvault_update
     {{ run_hooks(post_hooks, inside_transaction=False) }}
 
     {{ return({'relations': [target_relation]}) }}

@@ -2,7 +2,11 @@ from behave import fixture
 
 
 @fixture
+<<<<<<< HEAD
 def xts(context):
+=======
+def xts_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to load xts
     """
@@ -109,6 +113,24 @@ def xts(context):
             },
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "XTS_COMPPK": {
+            "src_pk": ["CUSTOMER_PK", "CUSTOMER_PHONE"],
+            "src_ldts": "LOAD_DATE",
+            "src_satellite": {
+                "SATELLITE_CUSTOMER": {
+                    "sat_name": {
+                        "SATELLITE_NAME": "SATELLITE_NAME"
+                    },
+                    "hashdiff": {
+                        "HASHDIFF": "HASHDIFF"
+                    }
+                },
+            },
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "XTS_2SAT": {
             "src_pk": "CUSTOMER_PK",
             "src_ldts": "LOAD_DATE",
@@ -167,7 +189,11 @@ def xts(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -180,7 +206,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -193,7 +223,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -206,7 +240,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -219,7 +257,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_2SAT_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -232,7 +274,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_2SAT_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -245,7 +291,11 @@ def xts(context):
             }
         },
         "RAW_STAGE_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_FIRSTNAME": "VARCHAR",
                 "CUSTOMER_LASTNAME": "VARCHAR",
@@ -258,7 +308,11 @@ def xts(context):
             }
         },
         "STG_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "EFFECTIVE_FROM": "DATE",
@@ -275,7 +329,11 @@ def xts(context):
             }
         },
         "STG_CUSTOMER_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF_1": "BINARY(16)",
                 "HASHDIFF_2": "BINARY(16)",
@@ -294,7 +352,11 @@ def xts(context):
             }
         },
         "STG_CUSTOMER_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF_1": "BINARY(16)",
                 "HASHDIFF_2": "BINARY(16)",
@@ -315,7 +377,11 @@ def xts(context):
             }
         },
         "XTS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "LOAD_DATE": "DATE",
                 "SATELLITE_NAME": "VARCHAR",
@@ -323,8 +389,23 @@ def xts(context):
                 "SOURCE": "VARCHAR"
             }
         },
+<<<<<<< HEAD
         "XTS_2SAT": {
             "+column_types": {
+=======
+        "XTS_COMPPK": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_PHONE": "VARCHAR",
+                "LOAD_DATE": "DATE",
+                "SATELLITE_NAME": "VARCHAR",
+                "HASHDIFF": "BINARY(16)",
+                "SOURCE": "VARCHAR"
+            }
+        },
+        "XTS_2SAT": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "SATELLITE_NAME": "VARCHAR",
                 "HASHDIFF": "BINARY(16)",
@@ -333,7 +414,11 @@ def xts(context):
             }
         },
         "XTS_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "SATELLITE_NAME": "VARCHAR",
                 "HASHDIFF": "BINARY(16)",
@@ -452,6 +537,24 @@ def xts_bigquery(context):
             },
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "XTS_COMPPK": {
+            "src_pk": ["CUSTOMER_PK", "CUSTOMER_PHONE"],
+            "src_ldts": "LOAD_DATE",
+            "src_satellite": {
+                "SATELLITE_CUSTOMER": {
+                    "sat_name": {
+                        "SATELLITE_NAME": "SATELLITE_NAME"
+                    },
+                    "hashdiff": {
+                        "HASHDIFF": "HASHDIFF"
+                    }
+                },
+            },
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "XTS_2SAT": {
             "src_pk": "CUSTOMER_PK",
             "src_ldts": "LOAD_DATE",
@@ -510,7 +613,11 @@ def xts_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -523,7 +630,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -536,7 +647,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -549,7 +664,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -562,7 +681,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_2SAT_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -575,7 +698,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_2SAT_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -588,7 +715,11 @@ def xts_bigquery(context):
             }
         },
         "RAW_STAGE_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_FIRSTNAME": "STRING",
                 "CUSTOMER_LASTNAME": "STRING",
@@ -601,7 +732,11 @@ def xts_bigquery(context):
             }
         },
         "STG_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "EFFECTIVE_FROM": "DATE",
@@ -618,7 +753,11 @@ def xts_bigquery(context):
             }
         },
         "STG_CUSTOMER_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF_1": "STRING",
                 "HASHDIFF_2": "STRING",
@@ -637,7 +776,11 @@ def xts_bigquery(context):
             }
         },
         "STG_CUSTOMER_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF_1": "STRING",
                 "HASHDIFF_2": "STRING",
@@ -658,7 +801,11 @@ def xts_bigquery(context):
             }
         },
         "XTS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "LOAD_DATE": "DATE",
                 "SATELLITE_NAME": "STRING",
@@ -666,8 +813,23 @@ def xts_bigquery(context):
                 "SOURCE": "STRING"
             }
         },
+<<<<<<< HEAD
         "XTS_2SAT": {
             "+column_types": {
+=======
+        "XTS_COMPPK": {
+            "column_types": {
+                "CUSTOMER_PK": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "LOAD_DATE": "DATE",
+                "SATELLITE_NAME": "STRING",
+                "HASHDIFF": "STRING",
+                "SOURCE": "STRING"
+            }
+        },
+        "XTS_2SAT": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "SATELLITE_NAME": "STRING",
                 "HASHDIFF": "STRING",
@@ -676,7 +838,11 @@ def xts_bigquery(context):
             }
         },
         "XTS_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "SATELLITE_NAME": "STRING",
                 "HASHDIFF": "STRING",
@@ -795,6 +961,24 @@ def xts_sqlserver(context):
             },
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "XTS_COMPPK": {
+            "src_pk": ["CUSTOMER_PK", "CUSTOMER_PHONE"],
+            "src_ldts": "LOAD_DATE",
+            "src_satellite": {
+                "SATELLITE_CUSTOMER": {
+                    "sat_name": {
+                        "SATELLITE_NAME": "SATELLITE_NAME"
+                    },
+                    "hashdiff": {
+                        "HASHDIFF": "HASHDIFF"
+                    }
+                },
+            },
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "XTS_2SAT": {
             "src_pk": "CUSTOMER_PK",
             "src_ldts": "LOAD_DATE",
@@ -853,7 +1037,11 @@ def xts_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -866,7 +1054,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -879,7 +1071,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -892,7 +1088,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -905,7 +1105,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_2SAT_1": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -918,7 +1122,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_2SAT_2": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -931,7 +1139,11 @@ def xts_sqlserver(context):
             }
         },
         "RAW_STAGE_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_FIRSTNAME": "VARCHAR(50)",
                 "CUSTOMER_LASTNAME": "VARCHAR(50)",
@@ -944,7 +1156,11 @@ def xts_sqlserver(context):
             }
         },
         "STG_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "EFFECTIVE_FROM": "DATE",
@@ -961,7 +1177,11 @@ def xts_sqlserver(context):
             }
         },
         "STG_CUSTOMER_2SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF_1": "BINARY(16)",
                 "HASHDIFF_2": "BINARY(16)",
@@ -980,7 +1200,11 @@ def xts_sqlserver(context):
             }
         },
         "STG_CUSTOMER_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF_1": "BINARY(16)",
                 "HASHDIFF_2": "BINARY(16)",
@@ -1001,7 +1225,11 @@ def xts_sqlserver(context):
             }
         },
         "XTS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "LOAD_DATE": "DATE",
                 "SATELLITE_NAME": "VARCHAR(50)",
@@ -1009,8 +1237,23 @@ def xts_sqlserver(context):
                 "SOURCE": "VARCHAR(50)"
             }
         },
+<<<<<<< HEAD
         "XTS_2SAT": {
             "+column_types": {
+=======
+        "XTS_COMPPK": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "LOAD_DATE": "DATE",
+                "SATELLITE_NAME": "VARCHAR",
+                "HASHDIFF": "BINARY(16)",
+                "SOURCE": "VARCHAR(50)"
+            }
+        },
+        "XTS_2SAT": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "SATELLITE_NAME": "VARCHAR(50)",
                 "HASHDIFF": "BINARY(16)",
@@ -1019,7 +1262,11 @@ def xts_sqlserver(context):
             }
         },
         "XTS_3SAT": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "SATELLITE_NAME": "VARCHAR(50)",
                 "HASHDIFF": "BINARY(16)",

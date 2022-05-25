@@ -7,10 +7,16 @@
 {% endmacro %}
 
 {% macro sqlserver__current_timestamp() %}
+<<<<<<< HEAD
     getdate()
 {% endmacro %}
 
 
+=======
+    sysdatetime()
+{% endmacro %}
+
+>>>>>>> dbtvault_update
 {% macro current_timestamp_in_utc() -%}
   {{ return(adapter.dispatch('current_timestamp_in_utc', 'dbtvault')()) }}
 {%- endmacro %}
@@ -20,5 +26,9 @@
 {% endmacro %}
 
 {% macro sqlserver__current_timestamp_in_utc() %}
+<<<<<<< HEAD
     {{dbtvault.current_timestamp()}}
+=======
+    sysutcdatetime()
+>>>>>>> dbtvault_update
 {% endmacro %}

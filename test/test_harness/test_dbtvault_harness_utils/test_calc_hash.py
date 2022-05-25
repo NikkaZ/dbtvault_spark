@@ -1,6 +1,10 @@
 from pandas import Series
 
+<<<<<<< HEAD
 import dbtvault_harness_utils
+=======
+from test import dbtvault_harness_utils
+>>>>>>> dbtvault_update
 
 
 def test_calc_hash_without_hashing_for_single_column():

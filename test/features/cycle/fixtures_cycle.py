@@ -2,7 +2,11 @@ from behave import fixture
 
 
 @fixture
+<<<<<<< HEAD
 def cycle(context):
+=======
+def cycle_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to perform vault load cycles
     """
@@ -147,7 +151,11 @@ def cycle(context):
 
     context.seed_config = {
         "RAW_STAGE_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_DOB": "DATE",
@@ -157,7 +165,11 @@ def cycle(context):
             }
         },
         "RAW_STAGE_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_ID": "VARCHAR",
                 "CUSTOMER_ID": "VARCHAR",
                 "PRICE": "NUMBER(38,2)",
@@ -171,7 +183,11 @@ def cycle(context):
             }
         },
         "HUB_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATE": "DATE",
@@ -179,7 +195,11 @@ def cycle(context):
             }
         },
         "HUB_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_PK": "BINARY(16)",
                 "BOOKING_ID": "VARCHAR",
                 "LOAD_DATE": "DATE",
@@ -187,7 +207,11 @@ def cycle(context):
             }
         },
         "LINK_CUSTOMER_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_BOOKING_PK": "BINARY(16)",
                 "CUSTOMER_PK": "BINARY(16)",
                 "BOOKING_PK": "BINARY(16)",
@@ -196,7 +220,11 @@ def cycle(context):
             }
         },
         "SAT_CUST_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -207,7 +235,11 @@ def cycle(context):
             }
         },
         "SAT_BOOK_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "PHONE": "VARCHAR",
@@ -218,7 +250,11 @@ def cycle(context):
             }
         },
         "SAT_BOOK_BOOKING_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "PRICE": "NUMBER(38,2)",
@@ -379,7 +415,11 @@ def cycle_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_DOB": "DATE",
@@ -389,7 +429,11 @@ def cycle_bigquery(context):
             }
         },
         "RAW_STAGE_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_ID": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "PRICE": "STRING",
@@ -403,7 +447,11 @@ def cycle_bigquery(context):
             }
         },
         "HUB_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATE": "DATE",
@@ -411,7 +459,11 @@ def cycle_bigquery(context):
             }
         },
         "HUB_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_PK": "STRING",
                 "BOOKING_ID": "STRING",
                 "LOAD_DATE": "DATE",
@@ -419,7 +471,11 @@ def cycle_bigquery(context):
             }
         },
         "LINK_CUSTOMER_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_BOOKING_PK": "STRING",
                 "CUSTOMER_PK": "STRING",
                 "BOOKING_PK": "STRING",
@@ -428,7 +484,11 @@ def cycle_bigquery(context):
             }
         },
         "SAT_CUST_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -439,7 +499,11 @@ def cycle_bigquery(context):
             }
         },
         "SAT_BOOK_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "PHONE": "STRING",
@@ -450,10 +514,17 @@ def cycle_bigquery(context):
             }
         },
         "SAT_BOOK_BOOKING_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
                 "BOOKING_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "PRICE": "STRINGff",
+=======
+            "column_types": {
+                "BOOKING_PK": "STRING",
+                "HASHDIFF": "STRING",
+                "PRICE": "STRING",
+>>>>>>> dbtvault_update
                 "BOOKING_DATE": "DATE",
                 "DEPARTURE_DATE": "DATE",
                 "DESTINATION": "STRING",
@@ -611,7 +682,11 @@ def cycle_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
@@ -621,7 +696,11 @@ def cycle_sqlserver(context):
             }
         },
         "RAW_STAGE_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_ID": "VARCHAR(50)",
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "PRICE": "DECIMAL(38,2)",
@@ -635,7 +714,11 @@ def cycle_sqlserver(context):
             }
         },
         "HUB_CUSTOMER": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "LOAD_DATE": "DATE",
@@ -643,7 +726,11 @@ def cycle_sqlserver(context):
             }
         },
         "HUB_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_PK": "BINARY(16)",
                 "BOOKING_ID": "VARCHAR(50)",
                 "LOAD_DATE": "DATE",
@@ -651,7 +738,11 @@ def cycle_sqlserver(context):
             }
         },
         "LINK_CUSTOMER_BOOKING": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_BOOKING_PK": "BINARY(16)",
                 "CUSTOMER_PK": "BINARY(16)",
                 "BOOKING_PK": "BINARY(16)",
@@ -660,7 +751,11 @@ def cycle_sqlserver(context):
             }
         },
         "SAT_CUST_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
@@ -671,7 +766,11 @@ def cycle_sqlserver(context):
             }
         },
         "SAT_BOOK_CUSTOMER_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "PHONE": "VARCHAR(50)",
@@ -682,7 +781,11 @@ def cycle_sqlserver(context):
             }
         },
         "SAT_BOOK_BOOKING_DETAILS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "BOOKING_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "PRICE": "DECIMAL(38,2)",

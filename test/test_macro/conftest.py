@@ -1,11 +1,21 @@
 import os
 
 import pytest
+<<<<<<< HEAD
 
 import test
 from test import dbtvault_generator
 from test import dbtvault_harness_utils
 from . import structure_metadata
+=======
+import json
+import test
+from env import env_utils
+from test import dbtvault_generator
+from test import dbtvault_harness_utils
+from . import structure_metadata
+from filelock import FileLock
+>>>>>>> dbtvault_update
 
 mark_metadata_mapping = {
     "single_source_hub": structure_metadata.single_source_hub,
@@ -27,7 +37,11 @@ def generate_model(request):
         selected_mark = list(applied_marks & available_marks)
 
         if selected_mark:
+<<<<<<< HEAD
             if selected_mark[0] in mark_metadata_mapping.keys() and selected_mark[0] is not "macro":
+=======
+            if selected_mark[0] in mark_metadata_mapping.keys() and selected_mark[0] != "macro":
+>>>>>>> dbtvault_update
                 dbtvault_generator.raw_vault_structure(model_name=request.node.name,
                                                        vault_structure=macro_name,
                                                        **mark_metadata_mapping[selected_mark[0]]())
@@ -47,6 +61,7 @@ def generate_model(request):
 
 
 @pytest.fixture(scope='session', autouse=True)
+<<<<<<< HEAD
 def setup():
     dbtvault_harness_utils.setup_environment()
     os.chdir(test.TESTS_DBT_ROOT)
@@ -55,3 +70,31 @@ def setup():
     dbtvault_harness_utils.replace_test_schema()
     dbtvault_harness_utils.run_dbt_seed()
     yield
+=======
+def setup(tmp_path_factory, worker_id):
+    def test_setup():
+        os.chdir(test.TEST_PROJECT_ROOT)
+        env_utils.setup_environment()
+        dbtvault_harness_utils.clean_models()
+        dbtvault_harness_utils.clean_target()
+        dbtvault_harness_utils.replace_test_schema()
+        dbtvault_harness_utils.run_dbt_seeds()
+
+    # If not parallel
+    if worker_id == "master":
+        test_setup()
+    else:
+        root_tmp_dir = tmp_path_factory.getbasetemp().parent
+
+        fn = root_tmp_dir / "flag.tmp"
+
+        # Create a file and use locks to indicate setup has already occurred, avoid repeating setup
+        with FileLock(str(fn) + ".lock"):
+            if fn.is_file():
+                os.chdir(test.TEST_PROJECT_ROOT)
+                env_utils.setup_environment()
+            else:
+                test_setup()
+                fn.write_text(json.dumps({'status': 'in-use'}))
+
+>>>>>>> dbtvault_update

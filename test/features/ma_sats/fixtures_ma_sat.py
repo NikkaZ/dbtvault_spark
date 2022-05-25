@@ -1,8 +1,16 @@
 from behave import fixture
 
 
+<<<<<<< HEAD
 @fixture
 def multi_active_satellite(context):
+=======
+# Snowflake
+
+
+@fixture
+def multi_active_satellite_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to load multi active satellites
     """
@@ -78,6 +86,45 @@ def multi_active_satellite(context):
         }
     }
 
+<<<<<<< HEAD
+=======
+    context.stage_columns = {
+        "RAW_STAGE":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"]
+    }
+
+>>>>>>> dbtvault_update
     context.vault_structure_columns = {
         "MULTI_ACTIVE_SATELLITE": {
             "src_pk": "CUSTOMER_PK",
@@ -88,6 +135,18 @@ def multi_active_satellite(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_cdk": ["CUSTOMER_PHONE"],
+            "src_payload": ["CUSTOMER_NAME"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "MULTI_ACTIVE_SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_cdk": ["CUSTOMER_PHONE"],
@@ -155,7 +214,11 @@ def multi_active_satellite(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -164,7 +227,11 @@ def multi_active_satellite(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -173,7 +240,11 @@ def multi_active_satellite(context):
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -183,7 +254,11 @@ def multi_active_satellite(context):
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -193,7 +268,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -204,7 +283,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -214,8 +297,25 @@ def multi_active_satellite(context):
                 "SOURCE": "VARCHAR"
             }
         },
+<<<<<<< HEAD
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
             "+column_types": {
+=======
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR",
+                "CUSTOMER_PHONE": "VARCHAR",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATETIME",
+                "LOAD_DATE": "DATETIME",
+                "SOURCE": "VARCHAR"
+            }
+        },
+        "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -226,7 +326,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -237,7 +341,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -249,7 +357,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -261,7 +373,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -273,7 +389,11 @@ def multi_active_satellite(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -288,7 +408,11 @@ def multi_active_satellite(context):
 
 
 @fixture
+<<<<<<< HEAD
 def multi_active_satellite_cycle(context):
+=======
+def multi_active_satellite_cycle_snowflake(context):
+>>>>>>> dbtvault_update
     """
     Define the structures and metadata to perform load cycles for multi active satellites
     """
@@ -477,7 +601,11 @@ def multi_active_satellite_cycle(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -487,7 +615,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -497,7 +629,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -508,7 +644,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "NUMBER(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -519,7 +659,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -530,7 +674,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -541,7 +689,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -552,7 +704,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -563,7 +719,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -575,7 +735,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -587,7 +751,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -599,7 +767,11 @@ def multi_active_satellite_cycle(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_PHONE": "VARCHAR",
@@ -612,6 +784,7 @@ def multi_active_satellite_cycle(context):
         }
     }
 
+<<<<<<< HEAD
     @fixture
     def multi_active_satellite_bigquery(context):
         """
@@ -1221,6 +1394,10 @@ def multi_active_satellite_cycle(context):
                 }
             }
         }
+=======
+
+# BigQuery
+>>>>>>> dbtvault_update
 
 
 @fixture
@@ -1300,6 +1477,45 @@ def multi_active_satellite_bigquery(context):
         }
     }
 
+<<<<<<< HEAD
+=======
+    context.stage_columns = {
+        "RAW_STAGE":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"]
+    }
+
+>>>>>>> dbtvault_update
     context.vault_structure_columns = {
         "MULTI_ACTIVE_SATELLITE": {
             "src_pk": "CUSTOMER_PK",
@@ -1310,6 +1526,18 @@ def multi_active_satellite_bigquery(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_cdk": ["CUSTOMER_PHONE"],
+            "src_payload": ["CUSTOMER_NAME"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "MULTI_ACTIVE_SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_cdk": ["CUSTOMER_PHONE"],
@@ -1377,7 +1605,11 @@ def multi_active_satellite_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1386,7 +1618,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1395,7 +1631,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1405,7 +1645,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1415,7 +1659,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1426,7 +1674,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1436,8 +1688,25 @@ def multi_active_satellite_bigquery(context):
                 "SOURCE": "STRING"
             }
         },
+<<<<<<< HEAD
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
             "+column_types": {
+=======
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "STRING",
+                "CUSTOMER_NAME": "STRING",
+                "CUSTOMER_PHONE": "STRING",
+                "CUSTOMER_HASHDIFF": "STRING",
+                "HASHDIFF": "STRING",
+                "EFFECTIVE_FROM": "DATETIME",
+                "LOAD_DATE": "DATETIME",
+                "SOURCE": "STRING"
+            }
+        },
+        "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1448,7 +1717,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1459,7 +1732,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1471,7 +1748,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1483,7 +1764,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1495,7 +1780,11 @@ def multi_active_satellite_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1699,7 +1988,11 @@ def multi_active_satellite_cycle_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1709,7 +2002,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1719,7 +2016,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1730,7 +2031,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1741,7 +2046,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1752,7 +2061,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1763,7 +2076,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1774,7 +2091,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1785,7 +2106,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1797,7 +2122,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1809,7 +2138,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1821,7 +2154,11 @@ def multi_active_satellite_cycle_bigquery(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_PHONE": "STRING",
@@ -1835,6 +2172,12 @@ def multi_active_satellite_cycle_bigquery(context):
     }
 
 
+<<<<<<< HEAD
+=======
+# SQLServer
+
+
+>>>>>>> dbtvault_update
 @fixture
 def multi_active_satellite_sqlserver(context):
     """
@@ -1912,6 +2255,45 @@ def multi_active_satellite_sqlserver(context):
         }
     }
 
+<<<<<<< HEAD
+=======
+    context.stage_columns = {
+        "RAW_STAGE":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATE",
+             "SOURCE"],
+
+        "RAW_STAGE_TWO_CDK_TS":
+            ["CUSTOMER_ID",
+             "CUSTOMER_NAME",
+             "CUSTOMER_PHONE",
+             "EXTENSION",
+             "EFFECTIVE_FROM",
+             "LOAD_DATETIME",
+             "SOURCE"]
+    }
+
+>>>>>>> dbtvault_update
     context.vault_structure_columns = {
         "MULTI_ACTIVE_SATELLITE": {
             "src_pk": "CUSTOMER_PK",
@@ -1922,6 +2304,18 @@ def multi_active_satellite_sqlserver(context):
             "src_ldts": "LOAD_DATE",
             "src_source": "SOURCE"
         },
+<<<<<<< HEAD
+=======
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "src_pk": "CUSTOMER_PK",
+            "src_cdk": ["CUSTOMER_PHONE"],
+            "src_payload": ["CUSTOMER_NAME"],
+            "src_hashdiff": {"source_column": "HASHDIFF", "alias": "CUSTOMER_HASHDIFF"},
+            "src_eff": "EFFECTIVE_FROM",
+            "src_ldts": "LOAD_DATE",
+            "src_source": "SOURCE"
+        },
+>>>>>>> dbtvault_update
         "MULTI_ACTIVE_SATELLITE_TS": {
             "src_pk": "CUSTOMER_PK",
             "src_cdk": ["CUSTOMER_PHONE"],
@@ -1989,45 +2383,81 @@ def multi_active_satellite_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
+=======
+            "column_types": {
+                "CUSTOMER_ID": "DECIMAL(38, 0)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "EFFECTIVE_FROM": "DATE",
+>>>>>>> dbtvault_update
                 "LOAD_DATE": "DATE",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "LOAD_DATETIME": "DATETIME",
+=======
+            "column_types": {
+                "CUSTOMER_ID": "DECIMAL(38, 0)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "EXTENSION": "DECIMAL(38, 0)",
+<<<<<<< HEAD
+=======
+                "EFFECTIVE_FROM": "DATE",
+>>>>>>> dbtvault_update
                 "LOAD_DATE": "DATE",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "EXTENSION": "DECIMAL(38, 0)",
+<<<<<<< HEAD
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2038,18 +2468,43 @@ def multi_active_satellite_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "HASHDIFF": "BINARY(16)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+                "SOURCE": "VARCHAR(50)"
+            }
+        },
+        "MULTI_ACTIVE_SATELLITE_HD_ALIAS": {
+            "column_types": {
+                "CUSTOMER_PK": "BINARY(16)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "CUSTOMER_HASHDIFF": "BINARY(16)",
+                "HASHDIFF": "BINARY(16)",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATE": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2060,7 +2515,11 @@ def multi_active_satellite_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2071,7 +2530,11 @@ def multi_active_satellite_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2083,19 +2546,32 @@ def multi_active_satellite_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "EXTENSION": "DECIMAL(38, 0)",
                 "HASHDIFF": "BINARY(16)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2107,7 +2583,11 @@ def multi_active_satellite_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2311,7 +2791,11 @@ def multi_active_satellite_cycle_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2321,17 +2805,30 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "RAW_STAGE_TS": {
+<<<<<<< HEAD
             "+column_types": {
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+            "column_types": {
+                "CUSTOMER_ID": "DECIMAL(38, 0)",
+                "CUSTOMER_NAME": "VARCHAR(50)",
+                "CUSTOMER_PHONE": "VARCHAR(50)",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2342,18 +2839,31 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "RAW_STAGE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_ID": "DECIMAL(38, 0)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "EXTENSION": "DECIMAL(38, 0)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2364,18 +2874,31 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2386,7 +2909,11 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2397,7 +2924,11 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2409,19 +2940,32 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_TS": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "EXTENSION": "DECIMAL(38, 0)",
+<<<<<<< HEAD
                 "EFFECTIVE_FROM": "DATETIME",
                 "LOAD_DATETIME": "DATETIME",
+=======
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
+>>>>>>> dbtvault_update
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",
@@ -2433,7 +2977,11 @@ def multi_active_satellite_cycle_sqlserver(context):
             }
         },
         "MULTI_ACTIVE_SATELLITE_TWO_CDK_NO_PK_CDK_HASHDIFF": {
+<<<<<<< HEAD
             "+column_types": {
+=======
+            "column_types": {
+>>>>>>> dbtvault_update
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_PHONE": "VARCHAR(50)",

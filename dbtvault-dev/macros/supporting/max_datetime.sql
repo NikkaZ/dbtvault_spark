@@ -12,14 +12,22 @@
 
 {%- macro sqlserver__max_datetime() %}
 
+<<<<<<< HEAD
 {# TODO Change to '9999-12-31 23:59:59.9999999' during DATETIME2 redevelopment #}
     {% do return('9999-12-31 23:59:59.996') %}
+=======
+    {% do return('9999-12-31 23:59:59.9999999') %}
+>>>>>>> dbtvault_update
 
 {% endmacro -%}
 
 {%- macro bigquery__max_datetime() %}
 
+<<<<<<< HEAD
 {# TODO Should this be '9999-12-31 23:59:59.999999' ? #}
     {% do return('9999-12-31 23:59:59.996') %}
+=======
+    {% do return('9999-12-31 23:59:59.999999') %}
+>>>>>>> dbtvault_update
 
 {% endmacro -%}

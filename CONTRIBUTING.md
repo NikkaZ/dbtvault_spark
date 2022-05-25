@@ -7,7 +7,11 @@
 
 ## Install dependencies
 
+<<<<<<< HEAD
 Run `pipenv install --dev` 
+=======
+Run `pipenv install --dev`
+>>>>>>> dbtvault_update
 
 ## Setting up your development environment
 
@@ -19,12 +23,17 @@ In general, we follow the ["fork-and-pull"](https://github.com/susam/gitpr) Git 
 
 - Fork the repository to your own GitHub account
 - Clone the project to your machine
+<<<<<<< HEAD
 - Create a branch (from `develop`) locally with a succinct but descriptive name. 
+=======
+- Create a branch (from `develop`) locally with a succinct but descriptive name.
+>>>>>>> dbtvault_update
 - If it's a new feature, prefix the branch name with `feat/`
 - Commit changes to the branch
 - Push changes to your fork
 - Open a PR in our repository
 
+<<<<<<< HEAD
 ### 2. Create environment files from templates
 ##### NOTE: If you are an internal contributor (e.g. Datavault employee) then you may skip this step
 
@@ -69,6 +78,74 @@ IN THE EVEN THIS HAPPENS, PLEASE CHANGE YOUR DATABASE CREDENTIALS IMMEDIATELY**
 ### 3. Run the setup command
 
 ### Without 1Password integration
+=======
+### 2. Create environment files from templates (EXTERNAL ONLY)
+
+In the `<project_root>/env/templates` folder you will find two files: `db.tpl.env` and `profiles.tpl.yml`.
+
+#### profiles_external.tpl.yml
+
+This file is a template which can be used as a drop-in replacement for your dbt `profiles.yml` file, or added to an
+existing `profiles.yml`.
+
+Inside your python environment, run: `inv init-external -p <platform>`
+
+Platform may be one of:
+
+- `snowflake`
+- `bigquery`
+- `sqlserver`
+- `databricks`
+
+This will create a file: `env/profiles.yml`, which will look something like this:
+
+```
+dbtvault:
+  outputs:
+    databricks:
+      type: spark
+      method: odbc
+      driver: /opt/simba/spark/lib/64/libsparkodbc_sb64.so
+      schema: "{{ env_var('DATABRICKS_SCHEMA') }}"
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      port: "{{ env_var('DATABRICKS_PORT', 443) | as_number }}"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      endpoint: "{{ env_var('DATABRICKS_ENDPOINT') }}"
+
+      threads: 4
+
+  target: databricks
+```
+
+You may now set up your environment variables, any way you wish. Some examples are below.
+
+##### PyCharm
+
+![PyCharm Terminal Environment Variables](/assets/setup_environment.png)
+
+You may set up session-scoped (i.e. Only when PyCharm is open) environment variables in
+PyCharm, as per the above screenshot.
+
+1. Navigate to the following:
+Settings > Tools > Terminal > Environment Variables
+
+2. Paste one of the following into the text box:
+
+   - snowflake ```SNOWFLAKE_DB_ACCOUNT=;SNOWFLAKE_DB_USER=;SNOWFLAKE_DB_PW=;SNOWFLAKE_DB_ROLE=;SNOWFLAKE_DB_DATABASE=;SNOWFLAKE_DB_WH=;SNOWFLAKE_DB_SCHEMA=;```
+   - sqlserver ```SQLSERVER_DB_SERVER=;SQLSERVER_DB_PORT=;SQLSERVER_DB_DATABASE=;SQLSERVER_DB_SCHEMA=;SQLSERVER_DB_USER=;SQLSERVER_DB_PW=;```
+   - bigquery ```GCP_PROJECT_ID=;GCP_DATASET=;```
+   - databricks ```DATABRICKS_SCHEMA=;DATABRICKS_HOST=;DATABRICKS_PORT=;DATABRICKS_TOKEN=;DATABRICKS_ENDPOINT=;```
+
+3. Update the values for each variable by clicking the ![Edit Button](/assets/edit_button.PNG)
+4. Start a new PyCharm terminal and check that the environment variables have been set, e.g. on Linux: `printenv`
+
+[Read the dbt docs](https://docs.getdbt.com/dbt-cli/configure-your-profile) to learn more about `profiles.yml`
+
+### 3. Run the setup command
+
+### Without 1Password integration
+
+>>>>>>> dbtvault_update
 ##### Recommended for External Contributors
 
 Inside the virtual environment, run `inv setup -p <platform> -d`
@@ -76,9 +153,16 @@ Inside the virtual environment, run `inv setup -p <platform> -d`
 e.g. `inv setup -p snowflake -d`
 
 ### With 1Password integration
+<<<<<<< HEAD
 ##### Recommended for Datavault Employees
 
 - First, sign in to 1Password, following internal guides. 
+=======
+
+##### Recommended for Datavault Employees
+
+- First, sign in to 1Password, following internal guides.
+>>>>>>> dbtvault_update
 - Inside the virtual environment, run `inv setup -p <platform>`
 
 e.g. `inv setup -p snowflake`
@@ -93,7 +177,12 @@ e.g. `inv setup -p snowflake`
 - bigquery
 - sqlserver
 
+<<<<<<< HEAD
 `-d, --disable-op` Disables 1Password CLI integration, which is used by Datavault Developers internally for secrets management. 
+=======
+`-d, --disable-op` Disables 1Password CLI integration, which is used by Datavault Developers internally for secrets
+management.
+>>>>>>> dbtvault_update
 
 A successful run should produce something similar to the following output:
 

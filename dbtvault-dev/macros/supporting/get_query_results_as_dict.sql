@@ -3,8 +3,15 @@
 {% endmacro %}
 
 {% macro default__get_query_results_as_dict(query) %}
+<<<<<<< HEAD
 
 {# This macro returns a dictionary of the form {column_name: (tuple_of_results)} #}
+=======
+    {{ return(dbt_utils.get_query_results_as_dict(query)) }}
+{% endmacro %}
+
+{% macro sqlserver__get_query_results_as_dict(query) %}
+>>>>>>> dbtvault_update
 
     {%- call statement('get_query_results', fetch_result=True,auto_begin=false) -%}
 
@@ -24,4 +31,8 @@
 
     {{ return(sql_results) }}
 
+<<<<<<< HEAD
 {% endmacro %}
+=======
+{% endmacro %}
+>>>>>>> dbtvault_update

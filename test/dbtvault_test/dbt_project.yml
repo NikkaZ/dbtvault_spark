@@ -1,4 +1,5 @@
 name: dbtvault_test
+<<<<<<< HEAD
 version: 0.7.5
 require-dbt-version: ['>=0.18.0', <0.21.0]
 config-version: 2
@@ -10,10 +11,24 @@ test-paths: [tests]
 data-paths: [data]
 macro-paths: [macros]
 docs-paths: [docs]
+=======
+version: 0.7.9
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+config-version: 2
+profile: dbtvault
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+docs-paths: ["docs"]
+>>>>>>> dbtvault_update
 
 target-path: target
 clean-targets:
   - target
+<<<<<<< HEAD
   - dbt_modules
 
 vars:
@@ -56,3 +71,13 @@ seeds:
           EFFECTIVE_FROM: DATE
           LOAD_DATE: DATE
           SOURCE: VARCHAR
+=======
+  - dbt_packages
+
+vars:
+  hash: MD5
+  max_datetime: '{{ dbtvault.max_datetime() }}'
+
+seeds:
+  +quote_columns: true
+>>>>>>> dbtvault_update

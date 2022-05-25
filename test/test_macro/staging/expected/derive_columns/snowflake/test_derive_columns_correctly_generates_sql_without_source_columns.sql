@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 'STG_BOOKING' AS SOURCE,
 EFFECTIVE_FROM AS LOAD_DATE
+=======
+'STG_BOOKING' AS "SOURCE",
+"EFFECTIVE_FROM" AS "LOAD_DATE"
+>>>>>>> dbtvault_update
