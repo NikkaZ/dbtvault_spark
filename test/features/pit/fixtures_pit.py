@@ -1,8 +1,11 @@
 from behave import fixture
 
 
+# Snowflake
+
+
 @fixture
-def pit(context):
+def pit_snowflake(context):
     """
     Define the structures and metadata to perform PIT load
     """
@@ -140,7 +143,7 @@ def pit(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_ADDRESS": "VARCHAR",
@@ -150,7 +153,7 @@ def pit(context):
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "VARCHAR",
@@ -159,7 +162,7 @@ def pit(context):
             }
         },
         "RAW_STAGE_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "DASHBOARD_COLOUR": "VARCHAR",
                 "DISPLAY_NAME": "VARCHAR",
@@ -168,7 +171,7 @@ def pit(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATE": "DATETIME",
@@ -176,7 +179,7 @@ def pit(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -188,7 +191,7 @@ def pit(context):
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR",
@@ -199,7 +202,7 @@ def pit(context):
             }
         },
         "SAT_CUSTOMER_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DASHBOARD_COLOUR": "VARCHAR",
@@ -210,12 +213,12 @@ def pit(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
@@ -230,7 +233,7 @@ def pit(context):
 
 
 @fixture
-def pit_one_sat(context):
+def pit_one_sat_snowflake(context):
     """
     Define the structures and metadata to perform PIT load
     """
@@ -393,7 +396,7 @@ def pit_one_sat(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_ADDRESS": "VARCHAR",
@@ -403,7 +406,7 @@ def pit_one_sat(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_ADDRESS": "VARCHAR",
@@ -413,7 +416,7 @@ def pit_one_sat(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATE": "DATE",
@@ -421,7 +424,7 @@ def pit_one_sat(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -429,7 +432,7 @@ def pit_one_sat(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -441,7 +444,7 @@ def pit_one_sat(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -453,12 +456,12 @@ def pit_one_sat(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
@@ -466,7 +469,7 @@ def pit_one_sat(context):
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
@@ -474,7 +477,7 @@ def pit_one_sat(context):
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
@@ -482,7 +485,7 @@ def pit_one_sat(context):
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
@@ -493,7 +496,7 @@ def pit_one_sat(context):
 
 
 @fixture
-def pit_two_sats(context):
+def pit_two_sats_snowflake(context):
     """
     Define the structures and metadata to perform PIT load
     """
@@ -732,7 +735,7 @@ def pit_two_sats(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_ADDRESS": "VARCHAR",
@@ -742,7 +745,7 @@ def pit_two_sats(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "CUSTOMER_NAME": "VARCHAR",
                 "CUSTOMER_ADDRESS": "VARCHAR",
@@ -752,7 +755,7 @@ def pit_two_sats(context):
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "VARCHAR",
@@ -761,7 +764,7 @@ def pit_two_sats(context):
             }
         },
         "RAW_STAGE_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "VARCHAR",
@@ -770,7 +773,7 @@ def pit_two_sats(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATE": "DATE",
@@ -778,7 +781,7 @@ def pit_two_sats(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR",
                 "LOAD_DATETIME": "DATETIME",
@@ -786,7 +789,7 @@ def pit_two_sats(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -798,7 +801,7 @@ def pit_two_sats(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR",
@@ -810,7 +813,7 @@ def pit_two_sats(context):
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR",
@@ -821,7 +824,7 @@ def pit_two_sats(context):
             }
         },
         "SAT_CUSTOMER_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR",
@@ -832,12 +835,12 @@ def pit_two_sats(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
@@ -847,7 +850,7 @@ def pit_two_sats(context):
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
@@ -857,7 +860,7 @@ def pit_two_sats(context):
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
@@ -867,7 +870,7 @@ def pit_two_sats(context):
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
@@ -877,6 +880,9 @@ def pit_two_sats(context):
             }
         }
     }
+
+
+# BigQuery
 
 
 @fixture
@@ -999,15 +1005,13 @@ def pit_bigquery(context):
              "CUSTOMER_ADDRESS",
              "CUSTOMER_DOB",
              "LOAD_DATE",
-             "SOURCE"]
-        ,
+             "SOURCE"],
         "RAW_STAGE_LOGIN":
             ["CUSTOMER_ID",
              "LAST_LOGIN_DATE",
              "DEVICE_USED",
              "LOAD_DATE",
-             "SOURCE"]
-        ,
+             "SOURCE"],
         "RAW_STAGE_PROFILE":
             ["CUSTOMER_ID",
              "DASHBOARD_COLOUR",
@@ -1018,7 +1022,7 @@ def pit_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_ADDRESS": "STRING",
@@ -1028,7 +1032,7 @@ def pit_bigquery(context):
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "STRING",
@@ -1037,7 +1041,7 @@ def pit_bigquery(context):
             }
         },
         "RAW_STAGE_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "DASHBOARD_COLOUR": "STRING",
                 "DISPLAY_NAME": "STRING",
@@ -1046,7 +1050,7 @@ def pit_bigquery(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATE": "DATETIME",
@@ -1054,7 +1058,7 @@ def pit_bigquery(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -1066,7 +1070,7 @@ def pit_bigquery(context):
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "DEVICE_USED": "STRING",
@@ -1077,7 +1081,7 @@ def pit_bigquery(context):
             }
         },
         "SAT_CUSTOMER_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "DASHBOARD_COLOUR": "STRING",
@@ -1088,12 +1092,12 @@ def pit_bigquery(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_PK": "STRING",
@@ -1271,7 +1275,7 @@ def pit_one_sat_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_ADDRESS": "STRING",
@@ -1281,7 +1285,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_ADDRESS": "STRING",
@@ -1291,7 +1295,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATE": "DATE",
@@ -1299,7 +1303,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -1307,7 +1311,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -1319,7 +1323,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -1331,12 +1335,12 @@ def pit_one_sat_bigquery(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_PK": "STRING",
@@ -1344,7 +1348,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "STRING",
@@ -1352,7 +1356,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "STRING",
@@ -1360,7 +1364,7 @@ def pit_one_sat_bigquery(context):
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_PK": "STRING",
@@ -1610,7 +1614,7 @@ def pit_two_sats_bigquery(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_ADDRESS": "STRING",
@@ -1620,7 +1624,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "CUSTOMER_NAME": "STRING",
                 "CUSTOMER_ADDRESS": "STRING",
@@ -1630,7 +1634,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "STRING",
@@ -1639,7 +1643,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "RAW_STAGE_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "STRING",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "STRING",
@@ -1648,7 +1652,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATE": "DATE",
@@ -1656,7 +1660,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "CUSTOMER_ID": "STRING",
                 "LOAD_DATETIME": "DATETIME",
@@ -1664,7 +1668,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -1676,7 +1680,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "CUSTOMER_NAME": "STRING",
@@ -1688,7 +1692,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "DEVICE_USED": "STRING",
@@ -1699,7 +1703,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "SAT_CUSTOMER_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "STRING",
                 "HASHDIFF": "STRING",
                 "DEVICE_USED": "STRING",
@@ -1710,12 +1714,12 @@ def pit_two_sats_bigquery(context):
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_PK": "STRING",
@@ -1725,7 +1729,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "STRING",
@@ -1735,7 +1739,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "STRING",
@@ -1745,7 +1749,7 @@ def pit_two_sats_bigquery(context):
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
+            "column_types": {
                 "AS_OF_DATE": "DATETIME",
                 "CUSTOMER_PK": "STRING",
                 "SAT_CUSTOMER_DETAILS_PK": "STRING",
@@ -1755,6 +1759,9 @@ def pit_two_sats_bigquery(context):
             }
         }
     }
+
+
+# SQLServer
 
 
 @fixture
@@ -1877,15 +1884,13 @@ def pit_sqlserver(context):
              "CUSTOMER_ADDRESS",
              "CUSTOMER_DOB",
              "LOAD_DATE",
-             "SOURCE"]
-        ,
+             "SOURCE"],
         "RAW_STAGE_LOGIN":
             ["CUSTOMER_ID",
              "LAST_LOGIN_DATE",
              "DEVICE_USED",
              "LOAD_DATE",
-             "SOURCE"]
-        ,
+             "SOURCE"],
         "RAW_STAGE_PROFILE":
             ["CUSTOMER_ID",
              "DASHBOARD_COLOUR",
@@ -1896,90 +1901,90 @@ def pit_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(5)",
                 "CUSTOMER_NAME": "VARCHAR(10)",
                 "CUSTOMER_ADDRESS": "VARCHAR(30)",
                 "CUSTOMER_DOB": "DATE",
-                "LOAD_DATE": "DATETIME",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(5)",
                 "LAST_LOGIN_DATE": "DATETIME",
                 "DEVICE_USED": "VARCHAR(10)",
-                "LOAD_DATE": "DATETIME",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "RAW_STAGE_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(5)",
                 "DASHBOARD_COLOUR": "VARCHAR(10)",
                 "DISPLAY_NAME": "VARCHAR(10)",
-                "LOAD_DATE": "DATETIME",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(5)",
-                "LOAD_DATE": "DATETIME",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(10)",
                 "CUSTOMER_ADDRESS": "VARCHAR(30)",
                 "CUSTOMER_DOB": "DATE",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATE": "DATETIME",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR(10)",
-                "LAST_LOGIN_DATE": "DATETIME",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATE": "DATETIME",
+                "LAST_LOGIN_DATE": "DATETIME2",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "SAT_CUSTOMER_PROFILE": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DASHBOARD_COLOUR": "VARCHAR(10)",
                 "DISPLAY_NAME": "VARCHAR(10)",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATE": "DATETIME",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATE": "DATETIME2",
                 "SOURCE": "VARCHAR(10)"
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME"
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME",
+                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_LOGIN_PK": "BINARY(16)",
-                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME",
+                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_PROFILE_PK": "BINARY(16)",
-                "SAT_CUSTOMER_PROFILE_LDTS": "DATETIME"
+                "SAT_CUSTOMER_PROFILE_LDTS": "DATETIME2"
             }
         }
     }
@@ -2149,7 +2154,7 @@ def pit_one_sat_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
@@ -2159,17 +2164,17 @@ def pit_one_sat_sqlserver(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "LOAD_DATE": "DATE",
@@ -2177,15 +2182,15 @@ def pit_one_sat_sqlserver(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
@@ -2197,52 +2202,52 @@ def pit_one_sat_sqlserver(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME"
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME2"
             }
         }
     }
@@ -2488,7 +2493,7 @@ def pit_two_sats_sqlserver(context):
 
     context.seed_config = {
         "RAW_STAGE_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
@@ -2498,35 +2503,35 @@ def pit_two_sats_sqlserver(context):
             }
         },
         "RAW_STAGE_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
-                "LAST_LOGIN_DATE": "DATETIME",
+                "LAST_LOGIN_DATE": "DATETIME2",
                 "DEVICE_USED": "VARCHAR(50)",
                 "LOAD_DATE": "DATE",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "RAW_STAGE_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_ID": "VARCHAR(50)",
-                "LAST_LOGIN_DATE": "DATETIME",
+                "LAST_LOGIN_DATE": "DATETIME2",
                 "DEVICE_USED": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "HUB_CUSTOMER": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
                 "LOAD_DATE": "DATE",
@@ -2534,15 +2539,15 @@ def pit_two_sats_sqlserver(context):
             }
         },
         "HUB_CUSTOMER_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "CUSTOMER_ID": "VARCHAR(50)",
-                "LOAD_DATETIME": "DATETIME",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SAT_CUSTOMER_DETAILS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
@@ -2554,82 +2559,82 @@ def pit_two_sats_sqlserver(context):
             }
         },
         "SAT_CUSTOMER_DETAILS_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "CUSTOMER_NAME": "VARCHAR(50)",
                 "CUSTOMER_ADDRESS": "VARCHAR(50)",
                 "CUSTOMER_DOB": "DATE",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SAT_CUSTOMER_LOGIN": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR(50)",
-                "LAST_LOGIN_DATE": "DATETIME",
+                "LAST_LOGIN_DATE": "DATETIME2",
                 "EFFECTIVE_FROM": "DATE",
                 "LOAD_DATE": "DATE",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "SAT_CUSTOMER_LOGIN_TS": {
-            "+column_types": {
+            "column_types": {
                 "CUSTOMER_PK": "BINARY(16)",
                 "HASHDIFF": "BINARY(16)",
                 "DEVICE_USED": "VARCHAR(50)",
-                "LAST_LOGIN_DATE": "DATETIME",
-                "EFFECTIVE_FROM": "DATETIME",
-                "LOAD_DATETIME": "DATETIME",
+                "LAST_LOGIN_DATE": "DATETIME2",
+                "EFFECTIVE_FROM": "DATETIME2",
+                "LOAD_DATETIME": "DATETIME2",
                 "SOURCE": "VARCHAR(50)"
             }
         },
         "AS_OF_DATE": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME"
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2"
             }
         },
         "PIT_CUSTOMER": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME",
+                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_LOGIN_PK": "BINARY(16)",
-                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME"
+                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_TS": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME",
+                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_LOGIN_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_LOGIN_TS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_LOGIN_TS_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_LG": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME",
+                "SAT_CUSTOMER_DETAILS_TS_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_LOGIN_TS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_LOGIN_TS_LDTS": "DATETIME"
+                "SAT_CUSTOMER_LOGIN_TS_LDTS": "DATETIME2"
             }
         },
         "PIT_CUSTOMER_HG": {
-            "+column_types": {
-                "AS_OF_DATE": "DATETIME",
+            "column_types": {
+                "AS_OF_DATE": "DATETIME2",
                 "CUSTOMER_PK": "BINARY(16)",
                 "SAT_CUSTOMER_DETAILS_PK": "BINARY(16)",
-                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME",
+                "SAT_CUSTOMER_DETAILS_LDTS": "DATETIME2",
                 "SAT_CUSTOMER_LOGIN_PK": "BINARY(16)",
-                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME"
+                "SAT_CUSTOMER_LOGIN_LDTS": "DATETIME2"
             }
         }
     }
